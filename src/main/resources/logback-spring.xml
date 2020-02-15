@@ -2,20 +2,21 @@
 <configuration>
     <!-- 包含springboot对logback日志的默认配置 -->
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
-    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/spring.log}" />
     <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
 
     <!-- 重写springboot框架 org/springframework/boot/logging/logback/file-appender.xml 配置 -->
     <appender name="TIME_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 对日志进行编码 -->
         <encoder>
-            <!-- 匹配模式 -->
+            <!-- 日志记录行格式(格式化输出日志) -->
+            <!-- ${FILE_LOG_PATTERN}、${LOG_PATH} = logging.file.path、${LOG_FILE} = logging.file.name 使用的默认配置(全局) -->
             <pattern>${FILE_LOG_PATTERN}</pattern>
         </encoder>
-        <file>${LOG_FILE_PATH}</file>
+        <file>${LOG_PATH}/${LOG_FILE}</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件名 -->
             <!-- %i: 序号 -->
-            <fileNamePattern>${LOG_FILE_PATH}.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/${LOG_FILE}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <!-- 保留历史日志30天 -->
             <maxHistory>30</maxHistory>
             <!-- springboot默认情况下,日志文件为10MB时,会切分日志文件 -->
