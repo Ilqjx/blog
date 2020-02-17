@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice // 拦截所有标记 @Controller 注解的控制器
 public class ControllerExceptionHandler {
-
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @ExceptionHandler(Exception.class)
