@@ -1,25 +1,18 @@
 <!DOCTYPE html>
-<div lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
-    <!-- 移动端浏览效果设置 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>博客发布</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css">
-    <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css">
-    <link rel="stylesheet" href="../../static/css/me.css">
+    <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css" th:href="@{/lib/editormd/css/editormd.min.css}">
+    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
 </head>
 <body>
 
-    <!-- 导航 -->
-    <!-- inverted 反转黑色; attached 没有圆角贴在上面 -->
-    <nav class="ui inverted attached segment m-padded-tb-mini">
-        <!-- container 容器 -->
+    <nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini">
         <div class="ui container">
-            <!-- 导航组件 -->
-            <!-- stackable 响应式元素 小的时候堆叠在一块 -->
             <div class="ui inverted secondary stackable menu">
-                <!-- teal 颜色; item 代表 menu 中的每一个条目 -->
                 <h2 class="ui teal header item">管理后台</h2>
                 <a href="#" class="active m-item item m-mobile-hide"><i class="mini home icon"></i>首页</a>
                 <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>分类</a>
@@ -78,17 +71,8 @@
                 </div>
 
                 <div class="field">
-                    <div id="md-content" style="z-index: 1 !important;">    
-                        <textarea name="content" placeholder="博客内容" style="display: none;">[TOC]
-
-#### Disabled options
-
-- TeX (Based on KaTeX);
-- Emoji;
-- Task lists;
-- HTML tags decode;
-- Flowchart and Sequence Diagram;
-                        </textarea>
+                    <div id="md-content" style="z-index: 1 !important;">
+                        <textarea name="content" placeholder="博客内容" style="display: none;"></textarea>
                     </div>
                 </div>
 
@@ -178,13 +162,13 @@
     <br/>
 
     <!-- 底部footer -->
-    <footer class="ui inverted vertical segment m-padded-tb-massive">
+    <footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
         <div class="ui center aligned container">
             <div class="ui inverted divided stackable grid">
                 <div class="three wide column">
                     <div class="ui inverted link list">
                         <div class="item">
-                            <img src="../../static/images/wechat.jpg" class="ui rounded image" alt="" style="width: 110px;" />
+                            <img src="../../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" class="ui rounded image" alt="" style="width: 110px;" />
                         </div>
                     </div>
                 </div>
@@ -214,9 +198,11 @@
         </div>
     </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
-<script src="../../static/lib/editormd/editormd.min.js"></script>
+<!--/*/ <th:block th:replace="_fragments :: script"> /*/-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
+    <script src="../../static/lib/editormd/editormd.min.js"></script>
+<!--/*/ </th:block> /*/-->
 
     <script>
         var contentEditor;
@@ -227,7 +213,8 @@
                 width   : "100%",
                 height  : 640,
                 syncScrolling : "single",
-                path    : "../../static/lib/editormd/lib/"
+                // path    : "../../static/lib/editormd/lib/"
+                path    : "/lib/editormd/lib/"
             });
         });
 

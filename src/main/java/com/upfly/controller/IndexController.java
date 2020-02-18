@@ -13,7 +13,7 @@ public class IndexController {
 
     @GetMapping("/blog")
     public String blog() {
-        return "blog";
+        return "admin/blogs-input";
     }
 
 }

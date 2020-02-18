@@ -9,17 +9,11 @@
 </head>
 <body>
 
-    <!-- 导航 -->
-    <!-- inverted 反转黑色; attached 没有圆角贴在上面 -->
-    <nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini">
-        <!-- container 容器 -->
+    <nav th:replace="_fragments :: menu(0)" class="ui inverted attached segment m-padded-tb-mini">
         <div class="ui container">
-            <!-- 导航组件 -->
-            <!-- stackable 响应式元素 小的时候堆叠在一块 -->
             <div class="ui inverted secondary stackable menu">
-                <!-- teal 颜色; item 代表 menu 中的每一个条目 -->
                 <h2 class="ui teal header item">Guozhenwei</h2>
-                <a href="#" class="active m-item item m-mobile-hide"><i class="mini home icon"></i>首页</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="mini home icon"></i>首页</a>
                 <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>分类</a>
                 <a href="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>标签</a>
                 <a href="#" class="m-item item m-mobile-hide"><i class="mini clone icon"></i>归档</a>
