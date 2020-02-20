@@ -15,6 +15,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Aspect
 @Component
 public class LogAspect {
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass()); // 日志记录器
 
     @Pointcut("execution(* com.upfly.controller.*.*(..))") // @Pointcut定义切面 execution拦截哪些类
