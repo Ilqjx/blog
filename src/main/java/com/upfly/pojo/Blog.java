@@ -20,7 +20,7 @@ public class Blog {
     private Integer views; // 浏览次数
     private boolean appreciate; // 赞赏开启
     private boolean share; // 版权开启
-    private boolean comment; // 评论开启
+    private boolean review; // 评论开启
     private boolean publish; // 发布开启
     private boolean recommend; // 推荐开启
     @Temporal(TemporalType.TIMESTAMP)
@@ -30,8 +30,12 @@ public class Blog {
 
     @ManyToOne // many 是关系维护端(主动维护Type和Blog之间的关系)
     private Type type; // 分类
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Tag> tagList = new ArrayList<>();
+    @ManyToOne
+    private User user;
+    @OneToMany(mappedBy = "blog")
+    private List<Comment> commentList = new ArrayList<>();
 
     public Blog() {}
 
@@ -99,12 +103,12 @@ public class Blog {
         this.share = share;
     }
 
-    public boolean isComment() {
-        return comment;
+    public boolean isReview() {
+        return review;
     }
 
-    public void setComment(boolean comment) {
-        this.comment = comment;
+    public void setReview(boolean review) {
+        this.review = review;
     }
 
     public boolean isPublish() {
@@ -155,6 +159,22 @@ public class Blog {
         this.tagList = tagList;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
+    }
+
     @Override
     public String toString() {
         return "Blog{" +
@@ -166,11 +186,15 @@ public class Blog {
                 ", views=" + views +
                 ", appreciate=" + appreciate +
                 ", share=" + share +
-                ", comment=" + comment +
+                ", review=" + review +
                 ", publish=" + publish +
                 ", recommend=" + recommend +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", type=" + type +
+                ", tagList=" + tagList +
+                ", user=" + user +
+                ", commentList=" + commentList +
                 '}';
     }
 

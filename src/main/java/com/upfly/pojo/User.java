@@ -2,7 +2,9 @@ package com.upfly.pojo;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "t_user")
@@ -21,6 +23,9 @@ public class User {
     private Date createTime; // 创建时间
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime; // 更新时间
+
+    @OneToMany(mappedBy = "user")
+    private List<Blog> blogList = new ArrayList<>();
 
     public User() {}
 
@@ -94,6 +99,14 @@ public class User {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public List<Blog> getBlogList() {
+        return blogList;
+    }
+
+    public void setBlogList(List<Blog> blogList) {
+        this.blogList = blogList;
     }
 
     @Override

@@ -2,7 +2,9 @@ package com.upfly.pojo;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "t_comment")
@@ -17,6 +19,13 @@ public class Comment {
     private String avatar; // 头像
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime; // 创建时间
+
+    @ManyToOne
+    private Blog blog;
+    @OneToMany(mappedBy = "parentComment")
+    private List<Comment> replyCommentList = new ArrayList<>();
+    @ManyToOne
+    private Comment parentComment;
 
     public Comment() {}
 
@@ -66,6 +75,30 @@ public class Comment {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Blog getBlog() {
+        return blog;
+    }
+
+    public void setBlog(Blog blog) {
+        this.blog = blog;
+    }
+
+    public List<Comment> getReplyCommentList() {
+        return replyCommentList;
+    }
+
+    public void setReplyCommentList(List<Comment> replyCommentList) {
+        this.replyCommentList = replyCommentList;
+    }
+
+    public Comment getParentComment() {
+        return parentComment;
+    }
+
+    public void setParentComment(Comment parentComment) {
+        this.parentComment = parentComment;
     }
 
     @Override

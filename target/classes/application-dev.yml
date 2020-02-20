@@ -7,7 +7,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update # 自动更新表结构
-    show-sql: true
+    show-sql: false
 
 logging:
   level:
