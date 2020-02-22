@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:fragment="head(title)">
+<head th:replace="admin/_fragments :: head(~{::title})">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title th:replace="${title}"></title>
+    <title>分类新增</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css">
-    <link rel="stylesheet" href="../../static/css/typo.css" th:href="@{/css/typo.css}">
-    <link rel="stylesheet" href="../../static/css/animate.css" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" href="../../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
-    <link rel="stylesheet" href="../../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
+    <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css" th:href="@{/lib/editormd/css/editormd.min.css}">
     <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
 </head>
 <body>
 
-    <nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini">
+    <nav th:replace="admin/_fragments :: menu(2)" class="ui inverted attached segment m-padded-tb-mini">
         <div class="ui container">
             <div class="ui inverted secondary stackable menu">
                 <h2 class="ui teal header item">管理后台</h2>
-                <a href="#" th:href="@{/admin/blogs}" class="m-item item m-mobile-hide" th:classappend="${n == 1} ? 'active'"><i class="mini home icon"></i>博客</a>
-                <a href="#" th:href="@{/admin/types}" class="m-item item m-mobile-hide" th:classappend="${n == 2} ? 'active'"><i class="mini idea icon"></i>分类</a>
-                <a href="#" th:href="@{/admin/tags}" class="m-item item m-mobile-hide" th:classappend="${n == 3} ? 'active'"><i class="mini tags icon"></i>标签</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="mini home icon"></i>首页</a>
+                <a href="#" class="active m-item item m-mobile-hide"><i class="mini idea icon"></i>分类</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>标签</a>
                 <div class="m-item right menu m-mobile-hide">
                     <div class="ui dropdown item">
                         <div class="text">
@@ -28,7 +25,7 @@
                         </div>
                         <i class="dropdown icon"></i>
                         <div class="menu">
-                            <a href="#" th:href="@{/admin/logout}" class="item">注销</a>
+                            <a href="#" class="item">注销</a>
                         </div>
                     </div>
                 </div>
@@ -39,8 +36,48 @@
         </a>
     </nav>
 
+    <div class="ui attached pointing menu">
+        <div class="ui container">
+            <div class="right menu">
+                <a href="#" class="active teal item">发布</a>
+                <a href="#" class="item">列表</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 中间内容 -->
+    <div class="m-container-small m-padded-tb-big">
+        <div class="ui container">
+            <form action="#" method="post" class="ui form">
+
+                <div class="field">
+                    <div class="ui left labeled input">
+                        <label class="ui teal basic label">名称</label>
+                        <input type="text" name="name" placeholder="分类名称" />
+                    </div>
+                </div>
+
+                <div class="ui error message"></div>
+
+                <div class="ui right aligned container">
+                    <button type="button" class="ui button" onclick="window.history.go(-1)">返回</button>
+                    <button class="ui teal button">提交</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
     <!-- 底部footer -->
-    <footer th:fragment="footer" class="ui inverted vertical segment m-padded-tb-massive">
+    <footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
         <div class="ui center aligned container">
             <div class="ui inverted divided stackable grid">
                 <div class="three wide column">
@@ -76,16 +113,33 @@
         </div>
     </footer>
 
-    <th:block th:fragment="script">
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+<!--/*/ <th:block th:replace="_fragments :: script"> /*/-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
+<!--/*/ </th:block> /*/-->
 
-        <script src="../../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
-        <script src="../../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
-        <script src="../../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
-        <script src="../../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
-        <script src="../../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
-    </th:block>
+    <script>
+        $('.menu.toggle').click(function () {
+            $('.m-item').toggleClass('m-mobile-hide');
+        });
+
+        $('.ui.dropdown').dropdown({
+            on: 'hover'
+        });
+
+        $('.ui.form').form({
+            // 定义区域规则
+            fields: {
+                // title(名字任意) 区域
+                title: {
+                    identifier: 'title', // 标识符: 保持和表单 name 属性值一致
+                    rules: [{ // 验证规则
+                        type: 'empty', // 非空类型验证
+                        prompt: '标题：请输入博客标题' // 提示的内容 会自动寻找 div.ui.error.message
+                    }]
+                }
+            }
+        });
+    </script>
 </body>
 </html>

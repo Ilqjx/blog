@@ -12,17 +12,23 @@ public class MD5Util {
      */
     public static String code(String str) {
         try {
+            // 生成一个MD5加密计算摘要
             MessageDigest md = MessageDigest.getInstance("MD5");
+            // 对字符串进行加密
             md.update(str.getBytes());
+            // 获得加密后的数据
             byte[] byteDigest = md.digest();
             int i;
             StringBuffer buf = new StringBuffer("");
+            // 二进制转16进制
             for (int offset = 0; offset < byteDigest.length; offset++) {
                 i = byteDigest[offset];
                 if (i < 0) {
+                    // i >= 0 && i <= 255
                     i += 256;
                 }
                 if (i < 16) {
+                    // '0 ~ f' 前面加0
                     buf.append("0");
                 }
                 buf.append(Integer.toHexString(i));

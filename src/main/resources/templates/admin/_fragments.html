@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title th:replace="${title}"></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css">
-    <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
-    <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
-    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
-    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+    <link rel="stylesheet" href="../../static/css/typo.css" th:href="@{/css/typo.css}">
+    <link rel="stylesheet" href="../../static/css/animate.css" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" href="../../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
+    <link rel="stylesheet" href="../../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
+    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
 </head>
 <body>
 
@@ -17,9 +17,9 @@
         <div class="ui container">
             <div class="ui inverted secondary stackable menu">
                 <h2 class="ui teal header item">管理后台</h2>
-                <a href="#" class="m-item item m-mobile-hide" th:classappend="${n == 1} ? 'active'"><i class="mini home icon"></i>博客</a>
-                <a href="#" class="m-item item m-mobile-hide" th:classappend="${n == 2} ? 'active'"><i class="mini idea icon"></i>分类</a>
-                <a href="#" class="m-item item m-mobile-hide" th:classappend="${n == 3} ? 'active'"><i class="mini tags icon"></i>标签</a>
+                <a href="#" th:href="@{/admin/blogs}" class="m-item item m-mobile-hide" th:classappend="${n == 1} ? 'active'"><i class="mini home icon"></i>博客</a>
+                <a href="#" th:href="@{/admin/types}" class="m-item item m-mobile-hide" th:classappend="${n == 2} ? 'active'"><i class="mini idea icon"></i>分类</a>
+                <a href="#" th:href="@{/admin/tags}" class="m-item item m-mobile-hide" th:classappend="${n == 3} ? 'active'"><i class="mini tags icon"></i>标签</a>
                 <div class="m-item right menu m-mobile-hide">
                     <div class="ui dropdown item">
                         <div class="text">
@@ -81,11 +81,11 @@
         <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
 
-        <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
-        <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
-        <script src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
-        <script src="../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
-        <script src="../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
+        <script src="../../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
+        <script src="../../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+        <script src="../../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
+        <script src="../../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+        <script src="../../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
     </th:block>
 </body>
 </html>
