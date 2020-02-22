@@ -48,9 +48,9 @@
     <!-- 中间内容 -->
     <div class="m-container-small m-padded-tb-big">
         <div class="ui container">
-            <form action="#" method="post" class="ui form">
+            <form action="#" th:action="@{/admin/types}" method="post" class="ui form">
 
-                <div class="field">
+                <div class="required field">
                     <div class="ui left labeled input">
                         <label class="ui teal basic label">名称</label>
                         <input type="text" name="name" placeholder="分类名称" />
@@ -61,7 +61,7 @@
 
                 <div class="ui right aligned container">
                     <button type="button" class="ui button" onclick="window.history.go(-1)">返回</button>
-                    <button class="ui teal button">提交</button>
+                    <button type="submit" class="ui teal button">提交</button>
                 </div>
 
             </form>
@@ -128,14 +128,12 @@
         });
 
         $('.ui.form').form({
-            // 定义区域规则
             fields: {
-                // title(名字任意) 区域
-                title: {
-                    identifier: 'title', // 标识符: 保持和表单 name 属性值一致
-                    rules: [{ // 验证规则
-                        type: 'empty', // 非空类型验证
-                        prompt: '标题：请输入博客标题' // 提示的内容 会自动寻找 div.ui.error.message
+                type: {
+                    identifier: 'name',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '分类名称不能为空'
                     }]
                 }
             }

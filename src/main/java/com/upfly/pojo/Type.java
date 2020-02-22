@@ -1,6 +1,7 @@
 package com.upfly.pojo;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ public class Type {
     @Id
     @GeneratedValue
     private Long id; // id
+    @NotBlank(message = "分类名称不能为空")
     private String name; // 分类名
 
     @OneToMany(mappedBy = "type") // one 是关系被维护端(被动维护Type和Blog之间的关系)
