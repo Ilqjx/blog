@@ -4,4 +4,7 @@ import com.upfly.pojo.Type;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TypeRepository extends JpaRepository<Type, Long> {
+
+    public Type findByName(String name);
+
 }

@@ -1,5 +1,7 @@
 package com.upfly.service.impl;
 
+import java.util.Optional;
+
 import com.upfly.dao.TypeRepository;
 import com.upfly.exception.NotFoundException;
 import com.upfly.pojo.Type;
@@ -12,27 +14,36 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class TypeServiceImpl implements TypeService {
 
     @Autowired
     private TypeRepository typeRepository;
 
     @Override
-    @Transactional
     public Type saveType(Type type) {
         return typeRepository.save(type);
     }
 
     @Override
-    @Transactional
     public Type getType(Long id) {
-        return typeRepository.getOne(id);
+        Optional<Type> typeOptional = typeRepository.findById(id);
+        try {
+            typeOptional.get();
+        } catch (Exception e) {
+            return null;
+        }
+        return typeOptional.get();
     }
 
     @Override
-    @Transactional
+    public Type getTypeByName(String name) {
+        return typeRepository.findByName(name);
+    }
+
+    @Override
     public Type updateType(Long id, Type type) {
-        Type tempType = typeRepository.getOne(id);
+        Type tempType = getType(id);
         if (tempType == null) {
             throw new NotFoundException("该分类不存在");
         }
@@ -41,13 +52,11 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
-    @Transactional
     public void deleteType(Long id) {
-        typeRepository.delete(typeRepository.getOne(id));
+        typeRepository.delete(getType(id));
     }
 
     @Override
-    @Transactional
     public Page<Type> listType(Pageable pageable) {
         return typeRepository.findAll(pageable);
     }

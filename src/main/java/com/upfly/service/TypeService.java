@@ -10,6 +10,8 @@ public interface TypeService {
 
     public Type getType(Long id);
 
+    public Type getTypeByName(String name);
+
     public Type updateType(Long id, Type type);
 
     public void deleteType(Long id);
