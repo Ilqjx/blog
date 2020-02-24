@@ -1,6 +1,7 @@
 package com.upfly.pojo;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ public class Tag {
     @Id
     @GeneratedValue
     private Long id; // id
+    @NotBlank(message = "标签名称不能为空")
     private String name; // 标签名
 
     @ManyToMany(mappedBy = "tagList") // 被动维护Blog和Tag多对多的关系
