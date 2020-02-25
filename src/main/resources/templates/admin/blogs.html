@@ -49,7 +49,7 @@
     <!-- 中间内容 -->
     <div class="m-container-small m-padded-tb-big">
         <div class="ui container">
-            <form action="#" method="post" class="ui segment form">
+            <form action="#" method="post" class="ui secondary segment form">
                 <div class="inline fields">
                     <div class="field">
                         <input type="text" name="title" placeholder="标题" />
@@ -79,7 +79,7 @@
             </form>
 
             <!-- celled 分割线 -->
-            <table class="ui celled table">
+            <table class="ui compact celled teal table">
                 <thead>
                     <tr>
                         <th></th>
@@ -91,48 +91,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>刻意练习清单</td>
-                        <td>认知升级</td>
-                        <td>是</td>
-                        <td>2020-02-06 17:21</td>
+                    <tr th:each="blog, status: ${page.content}">
+                        <td th:text="${status.count}"></td>
+                        <td th:text="${blog.title}">刻意练习清单</td>
+                        <td th:text="${blog.type.name}">认知升级</td>
+                        <td th:text="${blog.recommend} ? '是' : '否'">是</td>
+                        <td th:text="${blog.updateTime}">2020-02-06 17:21</td>
                         <td>
-                            <a href="#" class="ui mini teal basic button">编辑</a>
-                            <a href="#" class="ui mini red basic button">删除</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>刻意练习清单</td>
-                        <td>认知升级</td>
-                        <td>是</td>
-                        <td>2020-02-06 17:21</td>
-                        <td>
-                            <a href="#" class="ui mini teal basic button">编辑</a>
-                            <a href="#" class="ui mini red basic button">删除</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>刻意练习清单</td>
-                        <td>认知升级</td>
-                        <td>是</td>
-                        <td>2020-02-06 17:21</td>
-                        <td>
-                            <a href="#" class="ui mini teal basic button">编辑</a>
-                            <a href="#" class="ui mini red basic button">删除</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>刻意练习清单</td>
-                        <td>认知升级</td>
-                        <td>是</td>
-                        <td>2020-02-06 17:21</td>
-                        <td>
-                            <a href="#" class="ui mini teal basic button">编辑</a>
-                            <a href="#" class="ui mini red basic button">删除</a>
+                            <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui mini teal basic button">编辑</a>
+                            <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui mini red basic button">删除</a>
                         </td>
                     </tr>
                 </tbody>
@@ -140,8 +107,8 @@
                     <tr>
                         <th colspan="6">
                             <div class="ui mini pagination menu">
-                                <a href="#" class="item">上一页</a>
-                                <a href="#" class="item">下一页</a>
+                                <a href="#" th:href="@{/admin/blogs(page=${page.number}-1)}" th:unless="${page.first}" class="item">上一页</a>
+                                <a href="#" th:href="@{/admin/blogs(page=${page.number}+1)}" th:unless="${page.last}" class="item">下一页</a>
                             </div>
                             <a href="#" class="ui mini right floated teal basic button">新增</a>
                         </th>
