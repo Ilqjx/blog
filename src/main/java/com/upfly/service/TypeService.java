@@ -1,6 +1,8 @@
 package com.upfly.service;
 
-import com.upfly.pojo.Type;
+import java.util.List;
+
+import com.upfly.po.Type;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,6 +17,8 @@ public interface TypeService {
     public Type updateType(Long id, Type type);
 
     public void deleteType(Long id);
+
+    public List<Type> listType();
 
     public Page<Type> listType(Pageable pageable);
 

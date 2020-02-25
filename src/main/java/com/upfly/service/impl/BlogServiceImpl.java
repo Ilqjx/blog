@@ -11,9 +11,10 @@ import java.util.Optional;
 
 import com.upfly.dao.BlogRepository;
 import com.upfly.exception.NotFoundException;
-import com.upfly.pojo.Blog;
-import com.upfly.pojo.Type;
+import com.upfly.po.Blog;
+import com.upfly.po.Type;
 import com.upfly.service.BlogService;
+import com.upfly.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -61,7 +62,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Page<Blog> listBlog(Pageable pageable, Blog blog) {
+    public Page<Blog> listBlog(Pageable pageable, BlogQuery blogQuery) {
         return blogRepository.findAll(new Specification<Blog>() {
 
             @Override
@@ -74,20 +75,20 @@ public class BlogServiceImpl implements BlogService {
                 // predicate就是封装好的条件
                 List<Predicate> predicateList = new ArrayList<>();
                 // 标题(title)不为空 有条件
-                 if (blog.getTitle() != null && !"".equals(blog.getTitle())) {
+                 if (blogQuery.getTitle() != null && !"".equals(blogQuery.getTitle())) {
                      // 模糊查询
                      // arg1: 属性的名字(title)
                      // arg2: 属性值
-                     predicateList.add(cb.like(root.<String>get("title"), "%" + blog.getTitle() + "%"));
+                     predicateList.add(cb.like(root.<String>get("title"), "%" + blogQuery.getTitle() + "%"));
                  }
                  // 分类不为空 有条件
-                 if (blog.getType().getId() != null) {
+                 if (blogQuery.getTypeId() != null) {
                      // root.<Type>get("type").get("id") 先取到type对象 在取type对象的id
-                     predicateList.add(cb.equal(root.<Type>get("type").get("id"), blog.getType().getId()));
+                     predicateList.add(cb.equal(root.<Type>get("type").get("id"), blogQuery.getTypeId()));
                  }
                  // 推荐
-                if (blog.isRecommend()) {
-                    predicateList.add(cb.equal(root.<Boolean>get("recommend"), blog.isRecommend()));
+                if (blogQuery.isRecommend()) {
+                    predicateList.add(cb.equal(root.<Boolean>get("recommend"), blogQuery.isRecommend()));
                 }
                 // 查询
                 cq.where(predicateList.toArray(new Predicate[predicateList.size()]));

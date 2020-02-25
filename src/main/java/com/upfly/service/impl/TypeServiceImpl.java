@@ -1,10 +1,11 @@
 package com.upfly.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.upfly.dao.TypeRepository;
 import com.upfly.exception.NotFoundException;
-import com.upfly.pojo.Type;
+import com.upfly.po.Type;
 import com.upfly.service.TypeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,11 @@ public class TypeServiceImpl implements TypeService {
     @Override
     public void deleteType(Long id) {
         typeRepository.delete(getType(id));
+    }
+
+    @Override
+    public List<Type> listType() {
+        return typeRepository.findAll();
     }
 
     @Override

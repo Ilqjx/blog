@@ -1,7 +1,7 @@
 package com.upfly.service.impl;
 
 import com.upfly.dao.UserRepository;
-import com.upfly.pojo.User;
+import com.upfly.po.User;
 import com.upfly.service.UserService;
 import com.upfly.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;

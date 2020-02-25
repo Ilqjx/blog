@@ -3,7 +3,7 @@ package com.upfly.controller.admin;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.upfly.pojo.User;
+import com.upfly.po.User;
 import com.upfly.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

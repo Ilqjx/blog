@@ -49,19 +49,19 @@
     <!-- 中间内容 -->
     <div class="m-container-small m-padded-tb-big">
         <div class="ui container">
-            <form action="#" method="post" class="ui secondary segment form">
+            <div class="ui secondary segment form">
+                <input type="hidden" name="page" />
                 <div class="inline fields">
                     <div class="field">
                         <input type="text" name="title" placeholder="标题" />
                     </div>
                     <div class="field">
                         <div class="ui selection dropdown">
-                            <input type="hidden" name="type" />
+                            <input type="hidden" name="typeId" />
                             <i class="dropdown icon"></i>
                             <div class="default text">分类</div>
                             <div class="menu">
-                                <div class="item" data-value="1">错误日志</div>
-                                <div class="item" data-value="2">开发者手册</div>
+                                <div th:each="type: ${types}" class="item" th:data-value="${type.id}" th:text="${type.name}"></div>
                             </div>
                         </div>
                     </div>
@@ -73,14 +73,15 @@
                         </div>
                     </div>
                     <div class="field">
-                        <button class="ui mini teal basic button"><i class="search icon"></i>搜索</button>
+                        <button type="button" id="search-btn" class="ui mini teal basic button"><i class="search icon"></i>搜索</button>
                     </div>
                 </div>
-            </form>
+            </div>
 
-            <!-- celled 分割线 -->
-            <table class="ui compact celled teal table">
-                <thead>
+            <div id="table-container">
+                <!-- celled 分割线 -->
+                <table th:fragment="blogList" class="ui compact celled teal table">
+                    <thead>
                     <tr>
                         <th></th>
                         <th>标题</th>
@@ -89,8 +90,8 @@
                         <th>更新时间</th>
                         <th>操作</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <tr th:each="blog, status: ${page.content}">
                         <td th:text="${status.count}"></td>
                         <td th:text="${blog.title}">刻意练习清单</td>
@@ -102,19 +103,20 @@
                             <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui mini red basic button">删除</a>
                         </td>
                     </tr>
-                </tbody>
-                <tfoot>
+                    </tbody>
+                    <tfoot>
                     <tr>
                         <th colspan="6">
-                            <div class="ui mini pagination menu">
-                                <a href="#" th:href="@{/admin/blogs(page=${page.number}-1)}" th:unless="${page.first}" class="item">上一页</a>
-                                <a href="#" th:href="@{/admin/blogs(page=${page.number}+1)}" th:unless="${page.last}" class="item">下一页</a>
+                            <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
+                                <a onclick="page(this)" th:attr="data-page=${page.number}-1" th:unless="${page.first}" class="item">上一页</a>
+                                <a onclick="page(this)" th:attr="data-page=${page.number}+1" th:unless="${page.last}" class="item">下一页</a>
                             </div>
                             <a href="#" class="ui mini right floated teal basic button">新增</a>
                         </th>
                     </tr>
-                </tfoot>
-            </table>
+                    </tfoot>
+                </table>
+            </div>
 
         </div>
     </div>
@@ -158,7 +160,7 @@
         </div>
     </footer>
 
-<!--/*/ <th:block th:replace="_fragments :: script"> /*/-->
+<!--/*/ <th:block th:replace="admin/_fragments :: script"> /*/-->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
 <!--/*/ </th:block> /*/-->
@@ -169,6 +171,25 @@
         });
 
         $('.ui.dropdown').dropdown();
+
+        function page(obj) {
+            $("[name='page']").val($(obj).data("page"));
+            loadData();
+        }
+
+        $("#search-btn").click(function () {
+            loadData();
+        });
+
+        function loadData() {
+            var url = "/admin/blogs/search";
+            $("#table-container").load(url, {
+                title: $("[name='title']").val(),
+                typeId: $("[name='typeId']").val(),
+                recommend: $("[name='recommend']").prop('checked'),
+                page: $("[name='page']").val()
+            });
+        }
     </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 package com.upfly.service;
 
-import com.upfly.pojo.User;
+import com.upfly.po.User;
 
 public interface UserService {
 

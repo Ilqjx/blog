@@ -1,6 +1,7 @@
 package com.upfly.service;
 
-import com.upfly.pojo.Blog;
+import com.upfly.po.Blog;
+import com.upfly.vo.BlogQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,6 +15,6 @@ public interface BlogService {
 
     public void deleteBlog(Long id);
 
-    public Page<Blog> listBlog(Pageable pageable, Blog blog);
+    public Page<Blog> listBlog(Pageable pageable, BlogQuery blogQuery);
 
 }

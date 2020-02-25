@@ -1,4 +1,4 @@
-package com.upfly.pojo;
+package com.upfly.po;
 
 import javax.persistence.*;
 

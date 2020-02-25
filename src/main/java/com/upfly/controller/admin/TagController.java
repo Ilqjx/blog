@@ -2,7 +2,7 @@ package com.upfly.controller.admin;
 
 import javax.validation.Valid;
 
-import com.upfly.pojo.Tag;
+import com.upfly.po.Tag;
 import com.upfly.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
