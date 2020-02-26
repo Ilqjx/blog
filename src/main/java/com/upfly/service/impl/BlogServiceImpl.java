@@ -6,6 +6,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,9 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Blog saveBlog(Blog blog) {
+        blog.setViews(0);
+        blog.setCreateTime(new Date());
+        blog.setUpdateTime(new Date());
         return blogRepository.save(blog);
     }
 

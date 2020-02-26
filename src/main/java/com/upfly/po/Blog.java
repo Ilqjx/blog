@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.context.annotation.Lazy;
+
 @Entity
 @Table(name = "t_blog")
 public class Blog {
@@ -14,6 +16,8 @@ public class Blog {
     @GeneratedValue
     private Long id; // id
     private String title; // 标题
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
     private String content; // 内容
     private String firstPicture; // 首图
     private String flag; // 标记(原创、转载、翻译)
@@ -30,12 +34,15 @@ public class Blog {
 
     @ManyToOne // many 是关系维护端(主动维护Type和Blog之间的关系)
     private Type type; // 分类
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     private List<Tag> tagList = new ArrayList<>();
     @ManyToOne
     private User user;
     @OneToMany(mappedBy = "blog")
     private List<Comment> commentList = new ArrayList<>();
+
+    @Transient
+    private String tagIds;
 
     public Blog() {}
 
@@ -173,6 +180,14 @@ public class Blog {
 
     public void setCommentList(List<Comment> commentList) {
         this.commentList = commentList;
+    }
+
+    public String getTagIds() {
+        return tagIds;
+    }
+
+    public void setTagIds(String tagIds) {
+        this.tagIds = tagIds;
     }
 
     @Override

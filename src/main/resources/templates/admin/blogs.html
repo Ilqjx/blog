@@ -49,6 +49,11 @@
     <!-- 中间内容 -->
     <div class="m-container-small m-padded-tb-big">
         <div class="ui container">
+            <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+                <i class="close icon"></i>
+                <div class="header">提示：</div>
+                <p th:text="${message}"></p>
+            </div>
             <div class="ui secondary segment form">
                 <input type="hidden" name="page" />
                 <div class="inline fields">
@@ -56,13 +61,16 @@
                         <input type="text" name="title" placeholder="标题" />
                     </div>
                     <div class="field">
-                        <div class="ui selection dropdown">
-                            <input type="hidden" name="typeId" />
-                            <i class="dropdown icon"></i>
-                            <div class="default text">分类</div>
-                            <div class="menu">
-                                <div th:each="type: ${types}" class="item" th:data-value="${type.id}" th:text="${type.name}"></div>
+                        <div class="ui labeled action input">
+                            <div class="ui type selection dropdown">
+                                <input type="hidden" name="typeId" />
+                                <i class="dropdown icon"></i>
+                                <div class="default text">分类</div>
+                                <div class="menu">
+                                    <div th:each="type: ${types}" class="item" th:data-value="${type.id}" th:text="${type.name}"></div>
+                                </div>
                             </div>
+                            <button id="clear-btn" class="ui compact button">clear</button>
                         </div>
                     </div>
                     <div class="field">
@@ -80,13 +88,14 @@
 
             <div id="table-container">
                 <!-- celled 分割线 -->
-                <table th:fragment="blogList" class="ui compact celled teal table">
+                <table th:fragment="blogList" class="ui compact teal table">
                     <thead>
                     <tr>
                         <th></th>
                         <th>标题</th>
                         <th>类型</th>
                         <th>推荐</th>
+                        <th>状态</th>
                         <th>更新时间</th>
                         <th>操作</th>
                     </tr>
@@ -97,6 +106,7 @@
                         <td th:text="${blog.title}">刻意练习清单</td>
                         <td th:text="${blog.type.name}">认知升级</td>
                         <td th:text="${blog.recommend} ? '是' : '否'">是</td>
+                        <td th:text="${blog.publish} ? '发布' : '保存'">发布</td>
                         <td th:text="${blog.updateTime}">2020-02-06 17:21</td>
                         <td>
                             <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui mini teal basic button">编辑</a>
@@ -106,12 +116,12 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th colspan="6">
+                        <th colspan="7">
                             <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
                                 <a onclick="page(this)" th:attr="data-page=${page.number}-1" th:unless="${page.first}" class="item">上一页</a>
                                 <a onclick="page(this)" th:attr="data-page=${page.number}+1" th:unless="${page.last}" class="item">下一页</a>
                             </div>
-                            <a href="#" class="ui mini right floated teal basic button">新增</a>
+                            <a href="#" th:href="@{/admin/blogs/input}" class="ui mini right floated teal basic button">新增</a>
                         </th>
                     </tr>
                     </tfoot>
@@ -172,12 +182,24 @@
 
         $('.ui.dropdown').dropdown();
 
+        // 消息提示关闭初始化
+        $('.message .close').on('click', function () {
+            $(this)
+                .closest('.message')
+                .transition('fade');
+        });
+
+        $('#clear-btn').on('click', function() {
+            $('.ui.type.dropdown').dropdown('clear');
+        });
+
         function page(obj) {
             $("[name='page']").val($(obj).data("page"));
             loadData();
         }
 
         $("#search-btn").click(function () {
+            $("[name='page']").val(0);
             loadData();
         });
 

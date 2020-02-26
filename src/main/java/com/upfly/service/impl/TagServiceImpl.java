@@ -1,5 +1,7 @@
 package com.upfly.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import com.upfly.dao.TagRepository;
@@ -57,8 +59,29 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    public List<Tag> listTag() {
+        return tagRepository.findAll();
+    }
+
+    @Override
+    public List<Tag> listTag(String ids) {
+        return tagRepository.findAllById(convertToList(ids));
+    }
+
+    @Override
     public Page<Tag> listTag(Pageable pageable) {
         return tagRepository.findAll(pageable);
+    }
+
+    private List<Long> convertToList(String ids) {
+        List<Long> list = new ArrayList<>();
+        if (ids != null && !"".equals(ids)) {
+            String[] idArray = ids.split(",");
+            for (String id : idArray) {
+                list.add(new Long(id));
+            }
+        }
+        return list;
     }
 
 }
