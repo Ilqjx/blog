@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.context.annotation.Lazy;
-
 @Entity
 @Table(name = "t_blog")
 public class Blog {
@@ -45,6 +43,10 @@ public class Blog {
     private String tagIds;
 
     public Blog() {}
+
+    public void init() {
+        this.tagIds = tagListToIds(this.getTagList());
+    }
 
     public Long getId() {
         return id;
@@ -211,6 +213,24 @@ public class Blog {
                 ", user=" + user +
                 ", commentList=" + commentList +
                 '}';
+    }
+
+    private String tagListToIds(List<Tag> tagList) {
+        if (!tagList.isEmpty()) {
+            StringBuffer ids = new StringBuffer();
+            boolean flag = false;
+            for (Tag tag : tagList) {
+                if (flag) {
+                    ids.append(",");
+                } else {
+                    flag = true;
+                }
+                ids.append(tag.getId());
+            }
+            return ids.toString();
+        } else {
+            return tagIds;
+        }
     }
 
 }

@@ -21,6 +21,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -60,6 +61,14 @@ public class BlogController {
         return "admin/blogs-input";
     }
 
+    @GetMapping("/blogs/{id}/input")
+    public String edit(@PathVariable Long id, Model model) {
+        model.addAttribute("blog", blogService.getBlog(id));
+        model.addAttribute("tags", tagService.listTag());
+        model.addAttribute("types", typeService.listType());
+        return "admin/blogs-input";
+    }
+
     @PostMapping("/blogs")
     public String saveBlog(Blog blog, RedirectAttributes attributes, HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -78,6 +87,11 @@ public class BlogController {
             attributes.addFlashAttribute("message", "操作成功");
         }
         return "redirect:/admin/blogs";
+    }
+
+    @PostMapping("/blogs/{id}")
+    public String editBlog(@PathVariable Long id) {
+        return null;
     }
 
 }
