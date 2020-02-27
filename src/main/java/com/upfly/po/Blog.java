@@ -32,7 +32,7 @@ public class Blog {
 
     @ManyToOne // many 是关系维护端(主动维护Type和Blog之间的关系)
     private Type type; // 分类
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Tag> tagList = new ArrayList<>();
     @ManyToOne
     private User user;

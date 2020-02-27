@@ -63,7 +63,9 @@ public class BlogController {
 
     @GetMapping("/blogs/{id}/input")
     public String edit(@PathVariable Long id, Model model) {
-        model.addAttribute("blog", blogService.getBlog(id));
+        Blog blog = blogService.getBlog(id);
+        blog.init();
+        model.addAttribute("blog", blog);
         model.addAttribute("tags", tagService.listTag());
         model.addAttribute("types", typeService.listType());
         return "admin/blogs-input";
@@ -82,16 +84,43 @@ public class BlogController {
 
         Blog tempBlog = blogService.saveBlog(blog);
         if (tempBlog == null) {
-            attributes.addFlashAttribute("message", "操作失败");
+            attributes.addFlashAttribute("message", "新增失败");
         } else {
-            attributes.addFlashAttribute("message", "操作成功");
+            attributes.addFlashAttribute("message", "新增成功");
         }
         return "redirect:/admin/blogs";
     }
 
     @PostMapping("/blogs/{id}")
-    public String editBlog(@PathVariable Long id) {
-        return null;
+    public String editBlog(@PathVariable Long id, Blog blog, RedirectAttributes attributes, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        Type type = typeService.getType(blog.getType().getId());
+        List<Tag> tagList = tagService.listTag(blog.getTagIds());
+
+        blog.setUser(user);
+        blog.setType(type);
+        blog.setTagList(tagList);
+
+        Blog tempBlog = blogService.updateBlog(blog.getId(), blog);
+        if (tempBlog == null) {
+            attributes.addFlashAttribute("message", "更新失败");
+        } else {
+            attributes.addFlashAttribute("message", "更新成功");
+        }
+        return "redirect:/admin/blogs";
+    }
+
+    @GetMapping("/blogs/{id}/delete")
+    public String deleteBlog(@PathVariable Long id, RedirectAttributes attributes) {
+        blogService.deleteBlog(id);
+        Blog blog = blogService.getBlog(id);
+        if (blog == null) {
+            attributes.addFlashAttribute("message", "删除成功");
+        } else {
+            attributes.addFlashAttribute("message", "删除失败");
+        }
+        return "redirect:/admin/blogs";
     }
 
 }

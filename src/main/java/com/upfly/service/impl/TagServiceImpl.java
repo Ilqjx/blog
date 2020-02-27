@@ -78,10 +78,26 @@ public class TagServiceImpl implements TagService {
         if (ids != null && !"".equals(ids)) {
             String[] idArray = ids.split(",");
             for (String id : idArray) {
+                if(!isExist(id)) {
+                    Tag tag = new Tag();
+                    tag.setName(id);
+                    Tag tempTag = tagRepository.save(tag);
+                    id = tempTag.getId().toString();
+                }
                 list.add(new Long(id));
             }
         }
         return list;
+    }
+
+    private boolean isExist(String id) {
+        List<Tag> tagList = listTag();
+        for (Tag tag : tagList) {
+            if (id.equals(tag.getId().toString())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
