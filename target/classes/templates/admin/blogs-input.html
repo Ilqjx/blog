@@ -116,6 +116,10 @@
                     </div>
                 </div>
 
+                <div class="required field">
+                    <textarea name="description" placeholder="博客描述..." maxlength="200" th:text="*{description}"></textarea>
+                </div>
+
                 <div class="inline fields">
                     <div class="field">
                         <div class="ui checkbox">
@@ -254,6 +258,13 @@
                     rules: [{
                         type: 'empty',
                         prompt: '标题：请输入博客首图地址'
+                    }]
+                },
+                description: {
+                    identifier: 'description',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '标题：请输入博客描述'
                     }]
                 }
             }

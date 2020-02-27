@@ -20,6 +20,8 @@ public interface TypeService {
 
     public List<Type> listType();
 
+    public List<Type> listTypeTop(Integer size);
+
     public Page<Type> listType(Pageable pageable);
 
 }

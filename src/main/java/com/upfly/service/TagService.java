@@ -22,6 +22,8 @@ public interface TagService {
 
     public List<Tag> listTag(String ids);
 
+    public List<Tag> listTagTop(Integer size);
+
     public Page<Tag> listTag(Pageable pageable);
 
 }

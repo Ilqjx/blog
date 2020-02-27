@@ -19,6 +19,7 @@ public class Blog {
     private String content; // 内容
     private String firstPicture; // 首图
     private String flag; // 标记(原创、转载、翻译)
+    private String description; // 描述
     private Integer views; // 浏览次数
     private boolean appreciate; // 赞赏开启
     private boolean share; // 版权开启
@@ -86,6 +87,14 @@ public class Blog {
 
     public void setFlag(String flag) {
         this.flag = flag;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getViews() {
@@ -200,6 +209,7 @@ public class Blog {
                 ", content='" + content + '\'' +
                 ", firstPicture='" + firstPicture + '\'' +
                 ", flag='" + flag + '\'' +
+                ", description='" + description + '\'' +
                 ", views=" + views +
                 ", appreciate=" + appreciate +
                 ", share=" + share +
@@ -212,6 +222,7 @@ public class Blog {
                 ", tagList=" + tagList +
                 ", user=" + user +
                 ", commentList=" + commentList +
+                ", tagIds='" + tagIds + '\'' +
                 '}';
     }
 
