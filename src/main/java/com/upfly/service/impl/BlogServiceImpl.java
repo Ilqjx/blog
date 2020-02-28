@@ -15,6 +15,7 @@ import com.upfly.exception.NotFoundException;
 import com.upfly.po.Blog;
 import com.upfly.po.Type;
 import com.upfly.service.BlogService;
+import com.upfly.util.MarkdownUtil;
 import com.upfly.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,23 @@ public class BlogServiceImpl implements BlogService {
             return null;
         }
         return blogOptional.get();
+    }
+
+    @Override
+    public Blog getAndConvertBlog(Long id) {
+        Optional<Blog> blogOptional = blogRepository.findById(id);
+        try {
+            blogOptional.get();
+        } catch (Exception e) {
+            throw new NotFoundException("该博客不存在");
+        }
+        Blog blog = blogOptional.get();
+        Blog tempBlog = new Blog();
+        BeanUtils.copyProperties(blog, tempBlog);
+        String content = tempBlog.getContent();
+        String htmlContent =  MarkdownUtil.markdownToHtmlExtensions(content);
+        tempBlog.setContent(htmlContent);
+        return tempBlog;
     }
 
     @Override

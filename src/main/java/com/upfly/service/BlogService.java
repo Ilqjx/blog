@@ -13,6 +13,8 @@ public interface BlogService {
 
     public Blog getBlog(Long id);
 
+    public Blog getAndConvertBlog(Long id);
+
     public Blog updateBlog(Long id, Blog blog);
 
     public void deleteBlog(Long id);
