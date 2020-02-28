@@ -16,7 +16,7 @@ public class Type {
     @NotBlank(message = "分类名称不能为空")
     private String name; // 分类名
 
-    @OneToMany(mappedBy = "type") // one 是关系被维护端(被动维护Type和Blog之间的关系)
+    @OneToMany(mappedBy = "type", fetch = FetchType.EAGER) // one 是关系被维护端(被动维护Type和Blog之间的关系)
     private List<Blog> blogList = new ArrayList<>();
 
     public Type() {}

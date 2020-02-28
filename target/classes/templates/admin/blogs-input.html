@@ -123,9 +123,7 @@
                 <div class="inline fields">
                     <div class="field">
                         <div class="ui checkbox">
-                            <!-- hidden 默认不选中 -->
-                            <!-- checked 默认选中 -->
-                            <input type="checkbox" id="recommend" name="recommend" checked th:checked="*{recommend}" class="hidden" />
+                            <input type="checkbox" id="recommend" name="recommend" th:checked="*{id}==null ? 'true' : *{recommend}" class="hidden" />
                             <label for="recommend">推荐</label>
                         </div>
                     </div>

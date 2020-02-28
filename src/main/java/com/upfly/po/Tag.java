@@ -16,7 +16,7 @@ public class Tag {
     @NotBlank(message = "标签名称不能为空")
     private String name; // 标签名
 
-    @ManyToMany(mappedBy = "tagList") // 被动维护Blog和Tag多对多的关系
+    @ManyToMany(mappedBy = "tagList", fetch = FetchType.EAGER) // 被动维护Blog和Tag多对多的关系
     private List<Blog> blogList = new ArrayList<>();
 
     public Tag() {}
