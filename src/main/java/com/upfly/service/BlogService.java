@@ -21,6 +21,8 @@ public interface BlogService {
 
     public Page<Blog> listBlog(Pageable pageable);
 
+    public Page<Blog> listBlog(String query, Pageable pageable);
+
     public Page<Blog> listBlog(Pageable pageable, BlogQuery blogQuery);
 
 }
