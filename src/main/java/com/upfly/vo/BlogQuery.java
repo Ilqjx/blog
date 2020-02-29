@@ -32,4 +32,13 @@ public class BlogQuery {
         this.recommend = recommend;
     }
 
+    @Override
+    public String toString() {
+        return "BlogQuery{" +
+                "title='" + title + '\'' +
+                ", typeId=" + typeId +
+                ", recommend=" + recommend +
+                '}';
+    }
+
 }
