@@ -18,13 +18,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 public class TagServiceImpl implements TagService {
 
     @Autowired
     private TagRepository tagRepository;
 
     @Override
+    @Transactional
     public Tag saveTag(Tag tag) {
         return tagRepository.save(tag);
     }
@@ -46,6 +46,7 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    @Transactional
     public Tag updateTag(Long id, Tag tag) {
         Tag tempTag = getTag(id);
         if (tempTag == null) {
@@ -56,6 +57,7 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    @Transactional
     public void deleteTag(Long id) {
         tagRepository.delete(getTag(id));
     }

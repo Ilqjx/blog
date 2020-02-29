@@ -6,3 +6,5 @@ spring:
     cache: false
   profiles:
     active: dev # 指定当前使用哪个配置文件(后缀即可)
+
+comment.avatar: /images/avatar.jpg

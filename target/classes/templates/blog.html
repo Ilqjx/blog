@@ -121,21 +121,22 @@
                     <div th:fragment="commentList">
                         <div class="ui threaded comments" style="max-width: 100%;">
                             <h3 class="ui dividing header">评论</h3>
-                            <div class="comment">
+                            <div class="comment" th:each="comment: ${comments}">
                                 <a class="avatar">
-                                    <img src="https://picsum.photos/id/1005/100/100" />
+                                    <img src="https://picsum.photos/id/1005/100/100" th:src="@{${comment.avatar}}" />
                                 </a>
                                 <div class="content">
-                                    <a class="author">Matt</a>
+                                    <a class="author" th:text="${comment.nickname}">Matt</a>
                                     <div class="metadata">
-                                        <span class="date">今天下午 5:42</span>
+                                        <span class="date" th:text="${#dates.format(comment.createTime, 'yyyy-MM-dd HH:mm:ss')}">今天下午 5:42</span>
                                     </div>
-                                    <div class="text">太赞了！ </div>
+                                    <div class="text" th:text="${comment.content}">太赞了！ </div>
                                     <div class="actions">
                                         <a class="reply" data-commentid="1" data-commentnickname="Matt" onclick="reply(this)">回复</a>
                                     </div>
                                 </div>
                             </div>
+                            <!--/*-->
                             <div class="comment">
                                 <a class="avatar">
                                     <img src="https://picsum.photos/id/1005/100/100" />
@@ -185,6 +186,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <!--*/-->
                         </div>
                     </div>
                 </div>

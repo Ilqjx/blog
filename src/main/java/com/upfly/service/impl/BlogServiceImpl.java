@@ -28,13 +28,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 public class BlogServiceImpl implements BlogService {
 
     @Autowired
     private BlogRepository blogRepository;
 
     @Override
+    @Transactional
     public Blog saveBlog(Blog blog) {
         blog.setViews(0);
         blog.setCreateTime(new Date());
@@ -71,6 +71,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    @Transactional
     public Blog updateBlog(Long id, Blog blog) {
         Blog tempBlog = getBlog(id);
         if (tempBlog == null) {
@@ -82,6 +83,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    @Transactional
     public void deleteBlog(Long id) {
         blogRepository.delete(getBlog(id));
     }

@@ -17,13 +17,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 public class TypeServiceImpl implements TypeService {
 
     @Autowired
     private TypeRepository typeRepository;
 
     @Override
+    @Transactional
     public Type saveType(Type type) {
         return typeRepository.save(type);
     }
@@ -45,6 +45,7 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
+    @Transactional
     public Type updateType(Long id, Type type) {
         Type tempType = getType(id);
         if (tempType == null) {
@@ -55,6 +56,7 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
+    @Transactional
     public void deleteType(Long id) {
         typeRepository.delete(getType(id));
     }
