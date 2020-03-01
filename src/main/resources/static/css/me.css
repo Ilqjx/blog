@@ -121,6 +121,10 @@ body {
     display: inline-block !important;
 }
 
+.m-underline-none {
+    text-decoration: none !important;
+}
+
 /*----- container -----*/
 
 .m-container-small {
@@ -136,6 +140,14 @@ body {
 /*----- color -----*/
 
 .m-black {
+    color: #333 !important;
+}
+
+.m-teal {
+    color: #00B5AD !important;
+}
+
+.m-black-a a:hover {
     color: #333 !important;
 }
 

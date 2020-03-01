@@ -22,7 +22,7 @@ public class Comment {
 
     @ManyToOne
     private Blog blog;
-    @OneToMany(mappedBy = "parentComment")
+    @OneToMany(mappedBy = "parentComment", fetch = FetchType.EAGER)
     private List<Comment> replyCommentList = new ArrayList<>();
     @ManyToOne
     private Comment parentComment;

@@ -32,8 +32,8 @@ public class CommentController {
     @PostMapping("/comments")
     public String post(Comment comment) {
         Long blogId = comment.getBlog().getId();
-        Blog blog = blogService.getBlog(blogId);
-        comment.setBlog(blog);
+//        Blog blog = blogService.getBlog(blogId);
+//        comment.setBlog(blog);
         comment.setAvatar(avatar);
         commentService.saveComment(comment);
         return "redirect:/comments/" + blogId;
