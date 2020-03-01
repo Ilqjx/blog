@@ -16,8 +16,8 @@ public interface BlogRepository extends JpaRepository<Blog, Long>, JpaSpecificat
     @Query("SELECT b FROM Blog b WHERE b.recommend = true")
     public List<Blog> findTop(Pageable pageable);
 
-    @Query("SELECT b FROM Blog b WHERE b.title LIKE ?1 OR b.content like ?1")
-    public Page<Blog> findByQuery(String query, Pageable pageable);
+    @Query("SELECT b FROM Blog b WHERE b.title LIKE :query OR b.content like :query")
+    public Page<Blog> findByQuery(@Param("query") String query, Pageable pageable);
 
     @Modifying
     @Query("UPDATE Blog b SET b.views = b.views + 1 WHERE b.id = :id")

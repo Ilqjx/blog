@@ -3,7 +3,6 @@ package com.upfly.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.upfly.po.Blog;
 import com.upfly.po.Comment;
 import com.upfly.po.User;
 import com.upfly.service.BlogService;
