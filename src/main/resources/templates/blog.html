@@ -126,7 +126,10 @@
                                     <img src="https://picsum.photos/id/1005/100/100" th:src="@{${comment.avatar}}" />
                                 </a>
                                 <div class="content">
-                                    <a class="author m-underline-none" th:text="${comment.nickname}">Matt</a>
+                                    <a class="author m-underline-none">
+                                        <span th:text="${comment.nickname}">Matt</span>
+                                        <div class="ui teal basic left pointing label m-padded-mini" th:if="${comment.adminComment}">博主</div>
+                                    </a>
                                     <div class="metadata">
                                         <span class="date" th:text="${#dates.format(comment.createTime, 'yyyy-MM-dd HH:mm')}">今天下午 5:42</span>
                                     </div>
@@ -142,7 +145,9 @@
                                         </a>
                                         <div class="content">
                                             <a class="author m-underline-none">
-                                                <span th:text="${replyComment.nickname}"></span> <span th:text="|@${replyComment.parentComment.nickname}|" class="m-teal"></span>
+                                                <span th:text="${replyComment.nickname}"></span>
+                                                <div class="ui teal basic left pointing label m-padded-mini" th:if="${replyComment.adminComment}">博主</div>
+                                                <span th:text="|@${replyComment.parentComment.nickname}|" class="m-teal"></span>
                                             </a>
                                             <div class="metadata">
                                                 <span class="date" th:text="${#dates.format(replyComment.createTime, 'yyyy-MM-dd HH:mm')}">今天下午 5:42</span>
@@ -170,13 +175,13 @@
                             <!-- left icon: 在左边加图标 -->
                             <div class="ui left icon input">
                                 <i class="user icon"></i>
-                                <input type="text" name="nickname" placeholder="姓名" />
+                                <input type="text" name="nickname" placeholder="姓名" th:value="${session.user}!=null ? ${session.user.nickname}" />
                             </div>
                         </div>
                         <div class="field m-mobile-wide m-margin-bottom-small">
                             <div class="ui left icon input">
                                 <i class="mail icon"></i>
-                                <input type="text" name="email" placeholder="邮箱" />
+                                <input type="text" name="email" placeholder="邮箱" th:value="${session.user}!=null ? ${session.user.email}" />
                             </div>
                         </div>
                         <div class="field m-mobile-wide m-margin-bottom-small">
@@ -368,7 +373,6 @@
                 "email"   : $("[name='email']").val(),
                 "content" : $("[name='content']").val()
             }, function (responseTxt, statusTxt, xhr) {
-                $(window).scrollTo('#comment-container', 300);
                 clearData();
             });
         }

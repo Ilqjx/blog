@@ -54,6 +54,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    @Transactional
     public Blog getAndConvertBlog(Long id) {
         Optional<Blog> blogOptional = blogRepository.findById(id);
         try {
@@ -61,7 +62,9 @@ public class BlogServiceImpl implements BlogService {
         } catch (Exception e) {
             throw new NotFoundException("该博客不存在");
         }
-        Blog blog = blogOptional.get();
+        blogRepository.updateViews(id);
+
+        Blog blog = getBlog(id);
         Blog tempBlog = new Blog();
         BeanUtils.copyProperties(blog, tempBlog);
         String content = tempBlog.getContent();

@@ -38,12 +38,6 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     public Comment saveComment(Comment comment) {
         Long parentCommentId = comment.getParentComment().getId();
-//        if (parentCommentId != -1) {
-//            Comment parentComment = getComment(parentCommentId);
-//            comment.setParentComment(parentComment);
-//        } else {
-//            comment.setParentComment(null);
-//        }
         if (parentCommentId == -1) {
             comment.setParentComment(null);
         }
@@ -53,7 +47,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<Comment> listCommentByBlogId(Long blogId) {
-        Sort sort = Sort.by(Sort.Direction.DESC, "createTime");
+        Sort sort = Sort.by(Sort.Direction.ASC, "createTime");
         List<Comment> commentList = commentRepository.findByBlogIdAndParentCommentNull(blogId, sort);
         return eachComment(commentList);
     }

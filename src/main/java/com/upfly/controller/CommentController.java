@@ -1,7 +1,11 @@
 package com.upfly.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.upfly.po.Blog;
 import com.upfly.po.Comment;
+import com.upfly.po.User;
 import com.upfly.service.BlogService;
 import com.upfly.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +34,17 @@ public class CommentController {
     }
 
     @PostMapping("/comments")
-    public String post(Comment comment) {
+    public String post(Comment comment, HttpServletRequest request) {
         Long blogId = comment.getBlog().getId();
-//        Blog blog = blogService.getBlog(blogId);
-//        comment.setBlog(blog);
-        comment.setAvatar(avatar);
+
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            comment.setAvatar(user.getAvatar());
+            comment.setAdminComment(true);
+        } else {
+            comment.setAvatar(avatar);
+        }
         commentService.saveComment(comment);
         return "redirect:/comments/" + blogId;
     }

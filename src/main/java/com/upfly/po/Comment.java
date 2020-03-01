@@ -19,6 +19,7 @@ public class Comment {
     private String avatar; // 头像
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime; // 创建时间
+    private boolean adminComment; // 是否是博主
 
     @ManyToOne
     private Blog blog;
@@ -77,6 +78,14 @@ public class Comment {
         this.createTime = createTime;
     }
 
+    public boolean isAdminComment() {
+        return adminComment;
+    }
+
+    public void setAdminComment(boolean adminComment) {
+        this.adminComment = adminComment;
+    }
+
     public Blog getBlog() {
         return blog;
     }
@@ -110,6 +119,10 @@ public class Comment {
                 ", content='" + content + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", createTime=" + createTime +
+                ", adminComment=" + adminComment +
+                ", blog=" + blog +
+                ", replyCommentList=" + replyCommentList +
+                ", parentComment=" + parentComment +
                 '}';
     }
 
