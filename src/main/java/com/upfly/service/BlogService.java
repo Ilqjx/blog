@@ -1,6 +1,7 @@
 package com.upfly.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.upfly.po.Blog;
 import com.upfly.vo.BlogQuery;
@@ -19,6 +20,8 @@ public interface BlogService {
 
     public void deleteBlog(Long id);
 
+    public Long countBlog();
+
     public List<Blog> listRecommendBlogTop(Integer size);
 
     public Page<Blog> listBlog(Pageable pageable);
@@ -28,5 +31,7 @@ public interface BlogService {
     public Page<Blog> listBlog(String query, Pageable pageable);
 
     public Page<Blog> listBlog(Pageable pageable, BlogQuery blogQuery);
+
+    public Map<String, List<Blog>> listArchiveBlog();
 
 }

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="_fragments :: head(~{::title})">
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>归档</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css">
-    <link rel="stylesheet" href="../static/css/me.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css" />
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}" />
 </head>
 <body>
 
@@ -42,109 +42,24 @@
                         <h3 class="ui teal header">归档</h3>
                     </div>
                     <div class="right aligned column">
-                        共 <h2 class="ui orange header m-inline-block m-text-thin">14</h2> 篇
+                        共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${blogCount}">14</h2> 篇
                     </div>
                 </div>
             </div>
 
-            <h3 class="ui center aligned header">2020</h3>
-            <div class="ui fluid vertical menu">
-                <!-- item 有两个元素会一左一右分开 -->
-                <a href="#" target="_blank" class="item">
-                    <span>
-                        <i class="mini teal circle icon"></i>关于刻意练习的清单
-                        <div class="ui teal basic left pointing label m-padded-mini">2月06</div>
-                    </span>
-                    <div class="ui orange basic label m-padded-mini">原创</div>
-                </a>
-                <a href="#" target="_blank" class="item">
-                    <span>
-                        <i class="mini teal circle icon"></i>关于刻意练习的清单
-                        <div class="ui teal basic left pointing label m-padded-mini">2月06</div>
-                    </span>
-                    <div class="ui orange basic label m-padded-mini">原创</div>
-                </a>
-                <a href="#" target="_blank" class="item">
-                    <span>
-                        <i class="mini teal circle icon"></i>关于刻意练习的清单
-                        <div class="ui teal basic left pointing label m-padded-mini">2月06</div>
-                    </span>
-                    <div class="ui orange basic label m-padded-mini">原创</div>
-                </a>
-                <a href="#" target="_blank" class="item">
-                    <span>
-                        <i class="mini teal circle icon"></i>关于刻意练习的清单
-                        <div class="ui teal basic left pointing label m-padded-mini">2月06</div>
-                    </span>
-                    <div class="ui orange basic label m-padded-mini">原创</div>
-                </a>
-            </div>
-
-            <h3 class="ui center aligned header">2019</h3>
-            <div class="ui fluid vertical menu">
-                <!-- item 有两个元素会一左一右分开 -->
-                <a href="#" target="_blank" class="item">
-                    <span>
-                        <i class="mini teal circle icon"></i>关于刻意练习的清单
-                        <div class="ui teal basic left pointing label m-padded-mini">2月06</div>
-                    </span>
-                    <div class="ui orange basic label m-padded-mini">原创</div>
-                </a>
-                <a href="#" target="_blank" class="item">
-                    <span>
-                        <i class="mini teal circle icon"></i>关于刻意练习的清单
-                        <div class="ui teal basic left pointing label m-padded-mini">2月06</div>
-                    </span>
-                    <div class="ui orange basic label m-padded-mini">原创</div>
-                </a>
-                <a href="#" target="_blank" class="item">
-                    <span>
-                        <i class="mini teal circle icon"></i>关于刻意练习的清单
-                        <div class="ui teal basic left pointing label m-padded-mini">2月06</div>
-                    </span>
-                    <div class="ui orange basic label m-padded-mini">原创</div>
-                </a>
-                <a href="#" target="_blank" class="item">
-                    <span>
-                        <i class="mini teal circle icon"></i>关于刻意练习的清单
-                        <div class="ui teal basic left pointing label m-padded-mini">2月06</div>
-                    </span>
-                    <div class="ui orange basic label m-padded-mini">原创</div>
-                </a>
-            </div>
-
-            <h3 class="ui center aligned header">2018</h3>
-            <div class="ui fluid vertical menu">
-                <!-- item 有两个元素会一左一右分开 -->
-                <a href="#" target="_blank" class="item">
-                    <span>
-                        <i class="mini teal circle icon"></i>关于刻意练习的清单
-                        <div class="ui teal basic left pointing label m-padded-mini">2月06</div>
-                    </span>
-                    <div class="ui orange basic label m-padded-mini">原创</div>
-                </a>
-                <a href="#" target="_blank" class="item">
-                    <span>
-                        <i class="mini teal circle icon"></i>关于刻意练习的清单
-                        <div class="ui teal basic left pointing label m-padded-mini">2月06</div>
-                    </span>
-                    <div class="ui orange basic label m-padded-mini">原创</div>
-                </a>
-                <a href="#" target="_blank" class="item">
-                    <span>
-                        <i class="mini teal circle icon"></i>关于刻意练习的清单
-                        <div class="ui teal basic left pointing label m-padded-mini">2月06</div>
-                    </span>
-                    <div class="ui orange basic label m-padded-mini">原创</div>
-                </a>
-                <a href="#" target="_blank" class="item">
-                    <span>
-                        <i class="mini teal circle icon"></i>关于刻意练习的清单
-                        <div class="ui teal basic left pointing label m-padded-mini">2月06</div>
-                    </span>
-                    <div class="ui orange basic label m-padded-mini">原创</div>
-                </a>
-            </div>
+            <th:block th:each="item: ${archiveMap}">
+                <h3 class="ui center aligned header" th:text="${item.key}">2020</h3>
+                <div class="ui fluid vertical menu">
+                    <!-- item 有两个元素会一左一右分开 -->
+                    <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog: ${item.value}">
+                        <span>
+                            <i class="mini teal circle icon"></i><span th:text="${blog.title}"></span>
+                            <div class="ui teal basic left pointing label m-padded-mini" th:text="${#dates.format(blog.updateTime, 'MMMdd')}">9月03</div>
+                        </span>
+                        <div class="ui orange basic label m-padded-mini" th:text="${blog.flag}">原创</div>
+                    </a>
+                </div>
+            </th:block>
         </div>
     </div>
     <br/>
@@ -187,10 +102,8 @@
         </div>
     </footer>
 
-<!--/*/ <th:block th:replace="_fragments :: script"> /*/-->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
-<!--/*/ </th:block> /*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
 
     <script>
         $('.menu.toggle').click(function () {

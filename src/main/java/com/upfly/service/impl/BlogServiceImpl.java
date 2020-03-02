@@ -2,15 +2,12 @@ package com.upfly.service.impl;
 
 import javax.persistence.criteria.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
+import com.sun.org.apache.xalan.internal.xsltc.trax.XSLTCSource;
 import com.upfly.dao.BlogRepository;
 import com.upfly.exception.NotFoundException;
 import com.upfly.po.Blog;
-import com.upfly.po.Tag;
 import com.upfly.po.Type;
 import com.upfly.service.BlogService;
 import com.upfly.util.MarkdownUtil;
@@ -90,6 +87,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public Long countBlog() {
+        return blogRepository.count();
+    }
+
+    @Override
     public List<Blog> listRecommendBlogTop(Integer size) {
         Sort sort = Sort.by(Sort.Direction.DESC, "updateTime");
         Pageable pageable = PageRequest.of(0, size, sort);
@@ -156,6 +158,17 @@ public class BlogServiceImpl implements BlogService {
             }
 
         }, pageable);
+    }
+
+    @Override
+    public Map<String, List<Blog>> listArchiveBlog() {
+        Map<String, List<Blog>> archiveBlogMap = new LinkedHashMap<>();
+        List<String> yearList = blogRepository.findGroupByYear();
+        for (String year : yearList) {
+            List<Blog> blogList = blogRepository.findByYear(year);
+            archiveBlogMap.put(year, blogList);
+        }
+        return archiveBlogMap;
     }
 
 }

@@ -94,10 +94,10 @@
             <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
                 <div class="ui middle aligned two column grid">
                     <div class="column">
-                        <a href="#" th:href="@{/search(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini teal basic button">上一页</a>
+                        <a href="#" th:href="@{/types/{id}(id=${activeTypeId}, page=${page.number}-1)}" th:unless="${page.first}" class="ui mini teal basic button">上一页</a>
                     </div>
                     <div class="right aligned column">
-                        <a href="#" th:href="@{/search(page=${page.number}+1)}" th:unless="${page.last}" class="ui mini teal basic button">下一页</a>
+                        <a href="#" th:href="@{/types/{id}(id=${activeTypeId}, page=${page.number}+1)}" th:unless="${page.last}" class="ui mini teal basic button">下一页</a>
                     </div>
                 </div>
             </div>
@@ -143,10 +143,8 @@
         </div>
     </footer>
 
-<!--/*/ <th:block th:replace="_fragments :: script"> /*/-->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
-<!--/*/ </th:block> /*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
 
     <script>
         $('.menu.toggle').click(function () {

@@ -90,7 +90,7 @@
                         </div>
                         <div class="five wide column">
                             <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
-                                <img src="https://picsum.photos/id/1005/800/450" th:src="@{${blog.firstPicture}}" alt="" class="ui rounded image">
+                                <img src="https://picsum.photos/id/1005/800/450" th:src="@{${blog.firstPicture}}" class="ui rounded image">
                             </a>
                         </div>
                     </div>
@@ -100,10 +100,10 @@
             <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
                 <div class="ui middle aligned two column grid">
                     <div class="column">
-                        <a href="#" th:href="@{/search(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini teal basic button">上一页</a>
+                        <a href="#" th:href="@{/tags/{id}(id=${activeTagId}, page=${page.number}-1)}" th:unless="${page.first}" class="ui mini teal basic button">上一页</a>
                     </div>
                     <div class="right aligned column">
-                        <a href="#" th:href="@{/search(page=${page.number}+1)}" th:unless="${page.last}" class="ui mini teal basic button">下一页</a>
+                        <a href="#" th:href="@{/tags/{id}(id=${activeTagId}, page=${page.number}+1)}" th:unless="${page.last}" class="ui mini teal basic button">下一页</a>
                     </div>
                 </div>
             </div>
