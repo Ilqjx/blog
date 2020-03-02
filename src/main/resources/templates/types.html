@@ -55,243 +55,49 @@
             </div>
 
             <div class="ui top attached teal segment">
-                <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
-                    <!-- mobile reversed 移动端反转 图片在上 文字在下 -->
-                    <div class="ui mobile reversed stackable grid">
+                <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear" th:each="blog: ${page.content}">
+                    <div class="ui middle aligned mobile reversed stackable grid">
                         <div class="eleven wide column">
-                            <h3 class="ui header">你真的理解什么是财富自由吗？</h3>
-                            <p class="m-text">正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标的正确定义，甚至根本从来没有想过，只是大家都那么做而已...</p>
+                            <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black" th:text="${blog.title}">你真的理解什么是财富自由吗？</a></h3>
+                            <p class="m-text" th:text="|${blog.description}...|">正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标的正确定义，甚至根本从来没有想过，只是大家都那么做而已...</p>
                             <div class="ui stackable grid">
                                 <div class="eleven wide column">
                                     <div class="ui mini horizontal link list">
                                         <div class="item">
-                                            <!-- avatar 圆角图片 -->
-                                            <img src="https://picsum.photos/id/1005/100/100" alt="" class="ui avatar image" />
-                                            <!-- content 图片后面加文字 -->
+                                            <img th:src="@{${blog.user.avatar}}" class="ui avatar image" />
                                             <div class="content">
-                                                <a href="#" class="header">郭振伟</a>
+                                                <a href="#" class="header" th:text="${blog.user.nickname}">郭振伟</a>
                                             </div>
                                         </div>
                                         <div class="item">
-                                            <i class="calendar icon"></i> 2020-02-04
+                                            <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}"></span>
                                         </div>
                                         <div class="item">
-                                            <i class="eye icon"></i> 2432
+                                            <i class="eye icon"></i><span th:text="${blog.views}"></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="right aligned five wide column">
-                                    <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin">认知升级</a>
+                                    <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin" th:text="${blog.type.name}"></a>
                                 </div>
                             </div>
                         </div>
                         <div class="five wide column">
-                            <!-- target = _blank 打开一个新页面 -->
-                            <a href="#" target="_blank">
-                                <img src="https://picsum.photos/id/1005/800/450" alt="" class="ui rounded image">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
-                    <!-- mobile reversed 移动端反转 图片在上 文字在下 -->
-                    <div class="ui mobile reversed stackable grid">
-                        <div class="eleven wide column">
-                            <h3 class="ui header">你真的理解什么是财富自由吗？</h3>
-                            <p class="m-text">正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标的正确定义，甚至根本从来没有想过，只是大家都那么做而已...</p>
-                            <div class="ui stackable grid">
-                                <div class="eleven wide column">
-                                    <div class="ui mini horizontal link list">
-                                        <div class="item">
-                                            <!-- avatar 圆角图片 -->
-                                            <img src="https://picsum.photos/id/1005/100/100" alt="" class="ui avatar image" />
-                                            <!-- content 图片后面加文字 -->
-                                            <div class="content">
-                                                <a href="#" class="header">郭振伟</a>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <i class="calendar icon"></i> 2020-02-04
-                                        </div>
-                                        <div class="item">
-                                            <i class="eye icon"></i> 2432
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="right aligned five wide column">
-                                    <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin">认知升级</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="five wide column">
-                            <!-- target = _blank 打开一个新页面 -->
-                            <a href="#" target="_blank">
-                                <img src="https://picsum.photos/id/1005/800/450" alt="" class="ui rounded image">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
-                    <!-- mobile reversed 移动端反转 图片在上 文字在下 -->
-                    <div class="ui mobile reversed stackable grid">
-                        <div class="eleven wide column">
-                            <h3 class="ui header">你真的理解什么是财富自由吗？</h3>
-                            <p class="m-text">正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标的正确定义，甚至根本从来没有想过，只是大家都那么做而已...</p>
-                            <div class="ui stackable grid">
-                                <div class="eleven wide column">
-                                    <div class="ui mini horizontal link list">
-                                        <div class="item">
-                                            <!-- avatar 圆角图片 -->
-                                            <img src="https://picsum.photos/id/1005/100/100" alt="" class="ui avatar image" />
-                                            <!-- content 图片后面加文字 -->
-                                            <div class="content">
-                                                <a href="#" class="header">郭振伟</a>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <i class="calendar icon"></i> 2020-02-04
-                                        </div>
-                                        <div class="item">
-                                            <i class="eye icon"></i> 2432
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="right aligned five wide column">
-                                    <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin">认知升级</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="five wide column">
-                            <!-- target = _blank 打开一个新页面 -->
-                            <a href="#" target="_blank">
-                                <img src="https://picsum.photos/id/1005/800/450" alt="" class="ui rounded image">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
-                    <!-- mobile reversed 移动端反转 图片在上 文字在下 -->
-                    <div class="ui mobile reversed stackable grid">
-                        <div class="eleven wide column">
-                            <h3 class="ui header">你真的理解什么是财富自由吗？</h3>
-                            <p class="m-text">正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标的正确定义，甚至根本从来没有想过，只是大家都那么做而已...</p>
-                            <div class="ui stackable grid">
-                                <div class="eleven wide column">
-                                    <div class="ui mini horizontal link list">
-                                        <div class="item">
-                                            <!-- avatar 圆角图片 -->
-                                            <img src="https://picsum.photos/id/1005/100/100" alt="" class="ui avatar image" />
-                                            <!-- content 图片后面加文字 -->
-                                            <div class="content">
-                                                <a href="#" class="header">郭振伟</a>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <i class="calendar icon"></i> 2020-02-04
-                                        </div>
-                                        <div class="item">
-                                            <i class="eye icon"></i> 2432
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="right aligned five wide column">
-                                    <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin">认知升级</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="five wide column">
-                            <!-- target = _blank 打开一个新页面 -->
-                            <a href="#" target="_blank">
-                                <img src="https://picsum.photos/id/1005/800/450" alt="" class="ui rounded image">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
-                    <!-- mobile reversed 移动端反转 图片在上 文字在下 -->
-                    <div class="ui mobile reversed stackable grid">
-                        <div class="eleven wide column">
-                            <h3 class="ui header">你真的理解什么是财富自由吗？</h3>
-                            <p class="m-text">正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标的正确定义，甚至根本从来没有想过，只是大家都那么做而已...</p>
-                            <div class="ui stackable grid">
-                                <div class="eleven wide column">
-                                    <div class="ui mini horizontal link list">
-                                        <div class="item">
-                                            <!-- avatar 圆角图片 -->
-                                            <img src="https://picsum.photos/id/1005/100/100" alt="" class="ui avatar image" />
-                                            <!-- content 图片后面加文字 -->
-                                            <div class="content">
-                                                <a href="#" class="header">郭振伟</a>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <i class="calendar icon"></i> 2020-02-04
-                                        </div>
-                                        <div class="item">
-                                            <i class="eye icon"></i> 2432
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="right aligned five wide column">
-                                    <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin">认知升级</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="five wide column">
-                            <!-- target = _blank 打开一个新页面 -->
-                            <a href="#" target="_blank">
-                                <img src="https://picsum.photos/id/1005/800/450" alt="" class="ui rounded image">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
-                    <!-- mobile reversed 移动端反转 图片在上 文字在下 -->
-                    <div class="ui mobile reversed stackable grid">
-                        <div class="eleven wide column">
-                            <h3 class="ui header">你真的理解什么是财富自由吗？</h3>
-                            <p class="m-text">正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标的正确定义，甚至根本从来没有想过，只是大家都那么做而已...</p>
-                            <div class="ui stackable grid">
-                                <div class="eleven wide column">
-                                    <div class="ui mini horizontal link list">
-                                        <div class="item">
-                                            <!-- avatar 圆角图片 -->
-                                            <img src="https://picsum.photos/id/1005/100/100" alt="" class="ui avatar image" />
-                                            <!-- content 图片后面加文字 -->
-                                            <div class="content">
-                                                <a href="#" class="header">郭振伟</a>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <i class="calendar icon"></i> 2020-02-04
-                                        </div>
-                                        <div class="item">
-                                            <i class="eye icon"></i> 2432
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="right aligned five wide column">
-                                    <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin">认知升级</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="five wide column">
-                            <!-- target = _blank 打开一个新页面 -->
-                            <a href="#" target="_blank">
-                                <img src="https://picsum.photos/id/1005/800/450" alt="" class="ui rounded image">
+                            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+                                <img src="https://picsum.photos/id/1005/800/450" th:src="@{${blog.firstPicture}}" alt="" class="ui rounded image">
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="ui bottom attached segment">
+            <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
                 <div class="ui middle aligned two column grid">
                     <div class="column">
-                        <a href="#" class="ui mini teal basic button">上一页</a>
+                        <a href="#" th:href="@{/search(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini teal basic button">上一页</a>
                     </div>
                     <div class="right aligned column">
-                        <a href="#" class="ui mini teal basic button">下一页</a>
+                        <a href="#" th:href="@{/search(page=${page.number}+1)}" th:unless="${page.last}" class="ui mini teal basic button">下一页</a>
                     </div>
                 </div>
             </div>
