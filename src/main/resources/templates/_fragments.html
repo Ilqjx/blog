@@ -49,16 +49,16 @@
                 </div>
                 <div class="three wide column">
                     <h4 class="ui inverted header m-text-thin m-text-spaced">最新博客</h4>
-                    <div class="ui inverted link list">
-                        <a href="#" class="item">用户故事 (User Story) </a>
-                        <a href="#" class="item">关于刻意练习的清单</a>
-                        <a href="#" class="item">失败要趁早</a>
+                    <div id="newblog-div">
+                        <div class="ui inverted link list" th:fragment="newBlogList">
+                            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog: ${newBlogs}" th:text="${blog.title}">失败要趁早</a>
+                        </div>
                     </div>
                 </div>
                 <div class="three wide column">
                     <h4 class="ui inverted header m-text-thin m-text-spaced">联系我</h4>
                     <div class="ui inverted link list">
-                        <a href="#" class="item">Email: upfly@163.com</a>
+                        <a href="#" class="item" th:text="#{user.email}">Email: upfly@163.com</a>
                         <a href="#" class="item">QQ: 2227465945</a>
                     </div>
                 </div>
@@ -84,5 +84,11 @@
         <script src="../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
         <script src="../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
     </th:block>
+
+    <script>
+        var url = "/footer/newblog";
+        $("#newblog-div").load(url);
+    </script>
+
 </body>
 </html>

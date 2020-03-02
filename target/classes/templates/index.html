@@ -126,7 +126,7 @@
                                     <i class="idea icon"></i>分类
                                 </div>
                                 <div class="right aligned column">
-                                    <a href="#" target="_blank">more <i class="angle double right icon"></i></a>
+                                    <a href="#" th:href="@{/types/-1}" target="_blank">more <i class="angle double right icon"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +134,7 @@
                             <!-- fluid 填充外层容器 -->
                             <div class="ui fluid vertical menu">
                                 <!-- item 里面文字后面的 div/icon 会放在最右边 默认 -->
-                                <a href="#" class="item" th:each="type: ${types}">
+                                <a href="#" th:href="@{/types/{id}(id=${type.id})}" target="_blank" class="item" th:each="type: ${types}">
                                     <span th:text="${type.name}"></span>
                                     <!-- left pointing 左边小三角 -->
                                     <div class="ui teal basic left pointing label" th:text="${#arrays.length(type.blogList)}">13</div>
@@ -151,12 +151,12 @@
                                     <i class="tags icon"></i>标签
                                 </div>
                                 <div class="right aligned column">
-                                    <a href="#" target="_blank">more <i class="angle double right icon"></i></a>
+                                    <a href="#" th:href="@{/tags/-1}" target="_blank">more <i class="angle double right icon"></i></a>
                                 </div>
                             </div>
                         </div>
                         <div class="ui teal segment">
-                            <a href="#" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny" th:each="tag: ${tags}">
+                            <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny" th:each="tag: ${tags}">
                                 <span th:text="${tag.name}"></span> <div class="detail" th:text="${#arrays.length(tag.blogList)}">23</div>
                             </a>
                         </div>
@@ -222,16 +222,16 @@
         </div>
     </footer>
 
-<!-- thymeleaf 原型注释 -->
-<!--/*/ <th:block th:replace="_fragments :: script"> /*/-->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
-<!--/*/ </th:block> /*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
 
     <script>
         $('.menu.toggle').click(function () {
             $('.m-item').toggleClass('m-mobile-hide');
         });
+
+        var url = "/footer/newblog";
+        $("#newblog-div").load(url);
     </script>
 </body>
 </html>

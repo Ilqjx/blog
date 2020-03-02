@@ -1,5 +1,7 @@
 package com.upfly.controller;
 
+import java.util.List;
+
 import com.upfly.po.Blog;
 import com.upfly.service.BlogService;
 import com.upfly.service.TagService;
@@ -48,6 +50,13 @@ public class IndexController {
     public String blog(@PathVariable Long id, Model model) {
         model.addAttribute("blog", blogService.getAndConvertBlog(id));
         return "blog";
+    }
+
+    @GetMapping("/footer/newblog")
+    public String newBlogs(Model model) {
+        List<Blog> blogList = blogService.listRecommendBlogTop(3);
+        model.addAttribute("newBlogs", blogList);
+        return "_fragments :: newBlogList";
     }
 
 }
