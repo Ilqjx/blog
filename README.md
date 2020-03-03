@@ -1,7 +1,8 @@
 #### Ilqjx的个人博客
 - - -
 编程不仅是一门技术，更是一门艺术。
-> 参考b站Yancy02发布的视频，特此感谢。<br/>
+> 参考b站Yancy02发布的视频，特此感谢。
+>
 > 会陆续对项目进行技术升级以及功能的完善，有兴趣的朋友可以一起交流。
 
 环境：
@@ -24,3 +25,4 @@
 6. [目录生成插件](https://tscanlin.github.io/tocbot)
 7. [动画滚动插件](https://github.com/flesler/jquery.scrollTo)
 8. [滚动监听插件](http://imakewebthings.com/waypoints)
+9. [Markdown转HTML](https://github.com/atlass)
