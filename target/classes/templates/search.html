@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="_fragments :: head(~{::title})">
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>搜索结果</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css">
-    <link rel="stylesheet" href="../static/css/me.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <title>郭振伟个人博客_搜索结果</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css" />
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}" />
 </head>
 <body>
 
@@ -32,7 +34,7 @@
     </nav>
 
     <!-- 中间内容 -->
-    <div class="m-container-small m-padded-tb-big">
+    <div class="m-container-small m-shadow-small m-mobile-shadow m-mobile-lr-clear m-mobile-margin">
         <div class="ui container">
             <!-- header -->
             <div class="ui top attached segment">
@@ -47,31 +49,33 @@
                 </div>
             </div>
 
-            <div class="ui top attached teal segment">
-                <div class="ui padded vertical segment m-padded-tb-large" th:each="blog: ${page.content}">
+            <div th:if="${#arrays.length(page.content)}==0" class="m-margin-bottom-huge"></div>
+
+            <div class="ui top attached teal segment" th:unless="${#arrays.length(page.content)}==0">
+                <div id="opacity-div" class="ui padded vertical segment m-padded-tb-large m-blue-div-hover" th:each="blog: ${page.content}">
                     <div class="ui middle aligned mobile reversed stackable grid">
                         <div class="eleven wide column">
                             <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black" th:text="${blog.title}">你真的理解什么是财富自由吗？</a></h3>
-                            <p class="m-text" th:text="|${blog.description}...|">正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标的正确定义，甚至根本从来没有想过，只是大家都那么做而已...</p>
+                            <p class="m-text" th:text="${blog.description}">正确做好任何一件事情的前提是...</p>
                             <div class="ui stackable grid">
                                 <div class="eleven wide column">
                                     <div class="ui mini horizontal link list">
                                         <div class="item">
                                             <img th:src="@{${blog.user.avatar}}" class="ui avatar image" />
                                             <div class="content">
-                                                <a href="#" class="header" th:text="${blog.user.nickname}">郭振伟</a>
+                                                <span class="header m-black-small" th:text="${blog.user.nickname}">郭振伟</span>
                                             </div>
                                         </div>
                                         <div class="item">
-                                            <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}"></span>
+                                            <i class="calendar icon"></i> <span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}"></span>
                                         </div>
                                         <div class="item">
-                                            <i class="eye icon"></i><span th:text="${blog.views}"></span>
+                                            <i class="eye icon"></i> <span th:text="${blog.views}"></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="right aligned five wide column">
-                                    <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin" th:text="${blog.type.name}"></a>
+                                    <a href="#" th:href="@{/types/{id}(id=${blog.type.id})}" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin" th:text="${blog.type.name}"></a>
                                 </div>
                             </div>
                         </div>
@@ -87,10 +91,16 @@
             <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
                 <div class="ui middle aligned two column grid">
                     <div class="column">
-                        <a href="#" th:href="@{/search(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini teal basic button">上一页</a>
+                        <form id="pre_form" action="#" th:action="@{/search(page=${page.number}-1)}" method="post">
+                            <input type="hidden" name="query" th:value="${query}" />
+                            <a onclick="document.getElementById('pre_form').submit();" th:unless="${page.first}" class="ui mini teal basic button">上一页</a>
+                        </form>
                     </div>
                     <div class="right aligned column">
-                        <a href="#" th:href="@{/search(page=${page.number}+1)}" th:unless="${page.last}" class="ui mini teal basic button">下一页</a>
+                        <form id="last_form" action="#" th:action="@{/search(page=${page.number}+1)}" method="post">
+                            <input type="hidden" name="query" th:value="${query}" />
+                            <a onclick="document.getElementById('last_form').submit();" th:unless="${page.last}" class="ui mini teal basic button">下一页</a>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -136,15 +146,16 @@
         </div>
     </footer>
 
-<!--/*/ <th:block th:replace="_fragments :: script"> /*/-->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
-<!--/*/ </th:block> /*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
 
     <script>
         $('.menu.toggle').click(function () {
             $('.m-item').toggleClass('m-mobile-hide');
         });
     </script>
+
+<!--/*/ <th:block th:replace="_fragments :: js"> /*/-->
+<!--/*/ </th:block> /*/-->
 </body>
 </html>

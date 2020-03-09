@@ -27,6 +27,8 @@ public interface BlogRepository extends JpaRepository<Blog, Long>, JpaSpecificat
     public List<String> findGroupByYear();
 
     @Query("SELECT b FROM Blog b WHERE function('DATE_FORMAT', b.updateTime, '%Y') = :year")
-    public List<Blog> findByYear(@Param("year") String year);
+    public List<Blog> findByYear(@Param("year") String year, Pageable pageable);
+
+    public List<Blog> findByTypeId(Long typeId);
 
 }

@@ -1,8 +1,48 @@
 body {
-    background: url("../images/bg.png");
+    background: url("../images/background_web.jpeg");
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+nav {
+    border-width: 0 !important;
+}
+
+nav::before {
+    background: #fff linear-gradient(to left, #ff2d55, #5856d6, #34aadc, #007aff, #5ac8fa, #4cd964);
+    content: "";
+    height: 5px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+footer::before {
+    background: #fff linear-gradient(to right, #ff2d55, #5856d6, #34aadc, #007aff, #5ac8fa, #4cd964);
+    content: "";
+    height: 5px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.ui.transparent.input input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #000 inset !important;
+    box-shadow: 0 0 0px 1000px #000 inset !important;
+    -webkit-text-fill-color: #fff !important;
+    caret-color: #fff !important;
+}
+
+.ui.transparent.input input::selection {
+    color: #fff !important;
+    background: #fff !important;
 }
 
 /*----- padded -----*/
+
+.m-padded-none {
+    padding: 0 !important;
+}
 
 .m-padded-mini {
     padding: 0.2em !important;
@@ -56,6 +96,11 @@ body {
     padding-bottom: 5em !important;
 }
 
+.m-padded-tb-footer {
+    padding-top: 3em !important;
+    padding-bottom: 2em !important;
+}
+
 .m-padded-lr-responsive {
     padding-left: 4em !important;
     padding-right: 4em !important;
@@ -64,7 +109,7 @@ body {
 /*----- margin -----*/
 
 .m-margin-top-small {
-    margin-top: 0.5em !important;
+     margin-top: 0.5em !important;
 }
 
 .m-margin-top {
@@ -84,12 +129,21 @@ body {
     margin-bottom: 0.5em !important;
 }
 
+.m-margin-bottom-big {
+    margin-bottom: 30em !important;
+}
+
+.m-margin-bottom-huge {
+    margin-bottom: 40em !important;
+}
+
 /*----- text -----*/
 
 .m-text {
-    font-weight: 300 !important;
+    font-weight: 400 !important;
     letter-spacing: 1px !important;
     line-height: 1.8;
+    color: #000 !important;
 }
 
 .m-text-thin {
@@ -104,7 +158,26 @@ body {
     line-height: 1.8; /* 1.8倍行间距 */
 }
 
+.m-text-small {
+    font-size: 10px !important;
+}
+
+.m-text-big {
+    font-size: 13px !important;
+}
+
+/* 文字渐变色 */
+.gradient-text-one {
+    background-image: -webkit-linear-gradient(left, #f00, #fd8403, #ff0) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
 /*----- opacity -----*/
+
+#opacity-div {
+    background-color: rgba(255, 255, 255, 0) !important;
+}
 
 .m-opacity-mini {
     opacity: 0.8 !important;
@@ -114,6 +187,17 @@ body {
     opacity: 0.6 !important;
 }
 
+.m-opacity-background-mini {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.m-opacity-background-transparent {
+    background-color: rgba(255, 255, 255, 0) !important;
+}
+
+.ui .segment {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+}
 
 /*----- display -----*/
 
@@ -128,27 +212,81 @@ body {
 /*----- container -----*/
 
 .m-container-small {
-    max-width: 60em !important;
-    margin: auto !important;
+    max-width: 62em !important;
+    padding: 1em !important;
+    margin: 3em auto !important;
 }
 
 .m-container {
-    max-width: 72em !important;
-    margin: auto !important;
+    max-width: 80em !important;
+    padding: 0 1em !important;
+    margin: 4em auto 3em !important;
+}
+
+.m-container-login {
+    max-width: 30em !important;
+    margin: 0 auto !important;
+    padding-top: 12em !important;
+}
+
+/*----- hover -----*/
+
+.m-black-a-hover a:hover {
+    color: #333 !important;
+}
+
+.m-blue-div-hover div:hover a {
+    color: rgb(51, 122, 183) !important;
 }
 
 /*----- color -----*/
 
+.m-black-small {
+    color: #666 !important;
+}
+
 .m-black {
     color: #333 !important;
+}
+
+.m-white {
+     color: #fff !important;
+}
+
+.m-white-ed {
+    color: #ededed !important;
+}
+
+.m-white-background {
+    background-color: #ededed !important;
+}
+
+.m-white-opacity-tiny {
+    color: rgba(255, 255, 255, 0.6) !important;
 }
 
 .m-teal {
     color: #00B5AD !important;
 }
 
-.m-black-a-hover a:hover {
-    color: #333 !important;
+.m-input-placeholder input::-webkit-input-placeholder,
+.m-textarea-placeholder textarea::-webkit-input-placeholder {
+    color: #777 !important;
+}
+
+.m-input-placeholder input::-moz-placeholder,
+.m-textarea-placeholder textarea::-webkit-input-placeholder {
+    color: #777 !important;
+}
+
+.m-input-placeholder input:-moz-placeholder,
+.m-textarea-placeholder textarea::-webkit-input-placeholder {
+    color: #777 !important;
+}
+
+.m-input-placeholder input::-ms-input-placeholder,
+.m-textarea-placeholder textarea::-webkit-input-placeholder {
+    color: #777 !important;
 }
 
 /*----- position -----*/
@@ -178,13 +316,34 @@ body {
 /*----- shadow -----*/
 
 .m-shadow-small {
-    -webkit-box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2) !important; /* 适配其他浏览器 */
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2) !important;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important; */
+    -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important; /* 适配其他浏览器 */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
 }
 
 /* 媒体查询 */
 @media screen and (max-width: 768px) { /* max-width: 768px 屏幕小于768px时做的事情 */
+    /*body {*/
+    /*    background: url("../images/background_mobile.jpg") no-repeat center top fixed;*/
+    /*    background-attachment: fixed;*/
+    /*    background-size: cover;*/
+    /*}*/
+
+    body:before {
+        content: ' ';
+        position: fixed;
+        z-index: -1;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: url("../images/background_mobile.jpg") center 0 no-repeat;
+        background-size: cover;
+    }
+
+    #waypoint {
+        overflow: hidden;
+    }
+
     .m-mobile-hide {
         display: none !important;
     }
@@ -203,7 +362,29 @@ body {
         padding-right: 0 !important;
     }
 
+    .m-mobile-tb-clear {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .m-mobile-margin-tb-tiny {
+        margin: 0.5em 0 !important;
+    }
+
+    .m-mobile-margin {
+        margin: 1em auto 0 !important;
+    }
+
+    .m-mobile-margin-big {
+        margin: 2em auto 0 !important;
+    }
+
     .m-mobile-wide {
         width: 100% !important;
+    }
+
+    .m-mobile-shadow {
+        -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
     }
 }

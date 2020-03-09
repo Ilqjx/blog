@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="admin/_fragments :: head(~{::title})">
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>分类新增</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css">
-    <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css" th:href="@{/lib/editormd/css/editormd.min.css}">
-    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <title>郭振伟个人博客_分类新增</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css" />
+    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}" />
 </head>
 <body>
 
@@ -36,32 +37,32 @@
         </a>
     </nav>
 
-    <div class="ui attached pointing menu">
+    <div class="ui attached pointing menu m-opacity-background-mini">
         <div class="ui container">
             <div class="right menu">
-                <a href="#" th:href="@{/admin/types/input}" class="active item">新增</a>
                 <a href="#" th:href="@{/admin/types}" class="teal item">列表</a>
+                <a href="#" th:href="@{/admin/types/input}" class="active teal item m-white-background">新增</a>
             </div>
         </div>
     </div>
 
     <!-- 中间内容 -->
-    <div class="m-container-small m-padded-tb-big">
+    <div class="m-container-small m-mobile-lr-clear m-mobile-margin">
         <div class="ui container">
             <form action="#" method="post" th:object="${type}" th:action="*{id}==null ? @{/admin/types} : @{/admin/types/{id}(id=*{id})}" class="ui form">
                 <input type="hidden" name="id" th:value="*{id}">
 
                 <div class="required field">
-                    <div class="ui left labeled input">
-                        <label class="ui teal basic label">名称</label>
-                        <input type="text" name="name" placeholder="分类名称" th:value="*{name}" />
+                    <div class="ui left labeled input m-input-placeholder">
+                        <label class="ui teal basic label" style="background-color: rgba(255, 255, 255, 0.8) !important;">名称</label>
+                        <input type="text" name="name" class="m-opacity-background-mini" placeholder="分类名称" th:value="*{name}" />
                     </div>
                 </div>
 
                 <div class="ui error message"></div>
 
                 <!--/*/
-                <div class="ui negative message" th:if="${#fields.hasErrors('name')}">
+                <div class="ui negative message m-opacity-background-mini" th:if="${#fields.hasErrors('name')}">
                     <i class="close icon"></i>
                     <div class="header">验证失败</div>
                     <p th:errors="*{name}">提交信息不符合规则</p>
@@ -75,15 +76,8 @@
 
             </form>
         </div>
+        <div class="m-margin-bottom-big"></div>
     </div>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
 
     <!-- 底部footer -->
     <footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
@@ -122,10 +116,8 @@
         </div>
     </footer>
 
-<!--/*/ <th:block th:replace="_fragments :: script"> /*/-->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
-<!--/*/ </th:block> /*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
 
     <script>
         $('.menu.toggle').click(function () {
@@ -155,5 +147,8 @@
                 .transition('fade');
         });
     </script>
+
+<!--/*/ <th:block th:replace="_fragments :: js"> /*/-->
+<!--/*/ </th:block> /*/-->
 </body>
 </html>

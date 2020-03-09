@@ -1,28 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>归档</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <title>郭振伟个人博客_归档</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css" />
+    <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}" />
     <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}" />
 </head>
 <body>
 
-    <nav th:replace="_fragments :: menu(4)" class="ui inverted attached segment m-padded-tb-mini">
+    <nav th:replace="_fragments :: menu(4)" class="ui inverted attached segment m-padded-none">
         <div class="ui container">
             <div class="ui inverted secondary stackable menu">
-                <h2 class="ui teal header item">Guozhenwei</h2>
-                <a href="#" class="m-item item m-mobile-hide"><i class="mini home icon"></i>首页</a>
-                <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>分类</a>
-                <a href="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>标签</a>
-                <a href="#" class="active m-item item m-mobile-hide"><i class="mini clone icon"></i>归档</a>
-                <a href="#" class="m-item item m-mobile-hide"><i class="mini info icon"></i>关于我</a>
+                <h2 class="ui teal header item gradient-text-one">Guozhenwei</h2>
+                <a href="#" th:href="@{/}" class="m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+                <a href="#" th:href="@{/types/-1}" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+                <a href="#" th:href="@{/tags/-1}" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+                <a href="#" th:href="@{/archives}" class="active m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
+                <a href="#" th:href="@{/about}" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
                 <div class="right m-item item m-mobile-hide">
-                    <div class="ui icon inverted transparent input">
-                        <input type="text" placeholder="Search..." />
-                        <i class="search link icon"></i>
-                    </div>
+                    <form name="search" action="#" th:action="@{/search}" target="_blank" method="post">
+                        <div class="ui icon inverted transparent input">
+                            <input type="text" name="query" placeholder="Search..." th:value="${query}" />
+                            <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -32,7 +37,7 @@
     </nav>
 
     <!-- 中间内容 -->
-    <div class="m-container-small m-padded-tb-big">
+    <div class="m-container-small m-shadow-small m-mobile-shadow m-mobile-lr-clear m-mobile-margin">
         <div class="ui container">
             <!-- header -->
             <div class="ui top attached padded segment">
@@ -47,16 +52,18 @@
                 </div>
             </div>
 
-            <th:block th:each="item: ${archiveMap}">
-                <h3 class="ui center aligned header" th:text="${item.key}">2020</h3>
-                <div class="ui fluid vertical menu">
+            <div th:if="${#arrays.length(archiveMap)}==0" class="m-margin-bottom-huge"></div>
+
+            <th:block th:each="item: ${archiveMap}" th:unless="${#arrays.length(archiveMap)}==0">
+                <h3 class="ui center aligned header m-white" th:text="${item.key}">2020</h3>
+                <div class="ui fluid vertical menu m-opacity-background-mini">
                     <!-- item 有两个元素会一左一右分开 -->
-                    <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog: ${item.value}">
+                    <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item m-underline-none" th:each="blog: ${item.value}">
                         <span>
-                            <i class="mini teal circle icon"></i><span th:text="${blog.title}"></span>
-                            <div class="ui teal basic left pointing label m-padded-mini" th:text="${#dates.format(blog.updateTime, 'MMMdd')}">9月03</div>
+                            <i class="mini teal circle icon"></i> <span th:text="${blog.title}"></span>
                         </span>
-                        <div class="ui orange basic label m-padded-mini" th:text="${blog.flag}">原创</div>
+                        <div class="ui orange label" th:text="${blog.flag}">原创</div>
+                        <div class="ui teal basic label m-padded-mini" th:text="${#dates.format(blog.updateTime, 'MMMdd')}">9月03</div>
                     </a>
                 </div>
             </th:block>
@@ -110,5 +117,8 @@
             $('.m-item').toggleClass('m-mobile-hide');
         });
     </script>
+
+<!--/*/ <th:block th:replace="_fragments :: js"> /*/-->
+<!--/*/ </th:block> /*/-->
 </body>
 </html>

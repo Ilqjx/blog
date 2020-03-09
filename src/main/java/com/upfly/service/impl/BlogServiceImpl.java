@@ -4,7 +4,6 @@ import javax.persistence.criteria.*;
 
 import java.util.*;
 
-import com.sun.org.apache.xalan.internal.xsltc.trax.XSLTCSource;
 import com.upfly.dao.BlogRepository;
 import com.upfly.exception.NotFoundException;
 import com.upfly.po.Blog;
@@ -92,6 +91,26 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public List<Blog> listBlogByTagId(Long tagId) {
+        return blogRepository.findAll(new Specification<Blog>() {
+
+            @Override
+            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+                // 关联查询
+                Join join = root.join("tagList");
+                // join.get("id"): tagId
+                return cb.equal(join.get("id"), tagId);
+            }
+
+        });
+    }
+
+    @Override
+    public List<Blog> listBlogByTypeId(Long typeId) {
+        return blogRepository.findByTypeId(typeId);
+    }
+
+    @Override
     public List<Blog> listRecommendBlogTop(Integer size) {
         Sort sort = Sort.by(Sort.Direction.DESC, "updateTime");
         Pageable pageable = PageRequest.of(0, size, sort);
@@ -162,10 +181,13 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Map<String, List<Blog>> listArchiveBlog() {
+        Sort sort = Sort.by(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = PageRequest.of(0, 1000, sort);
+
         Map<String, List<Blog>> archiveBlogMap = new LinkedHashMap<>();
         List<String> yearList = blogRepository.findGroupByYear();
         for (String year : yearList) {
-            List<Blog> blogList = blogRepository.findByYear(year);
+            List<Blog> blogList = blogRepository.findByYear(year, pageable);
             archiveBlogMap.put(year, blogList);
         }
         return archiveBlogMap;

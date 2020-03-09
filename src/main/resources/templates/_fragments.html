@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:fragment="head(title)">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,18 +12,19 @@
     <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
 </head>
 <body>
-    <nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini">
+
+    <nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-none">
         <div class="ui container">
             <div class="ui inverted secondary stackable menu">
-                <h2 class="ui teal header item">Guozhenwei</h2>
-                <a href="#" th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n == 1} ? 'active'"><i class="mini home icon"></i>首页</a>
-                <a href="#" th:href="@{/types/-1}" class="m-item item m-mobile-hide" th:classappend="${n == 2} ? 'active'"><i class="mini idea icon"></i>分类</a>
-                <a href="#" th:href="@{/tags/-1}" class="m-item item m-mobile-hide" th:classappend="${n == 3} ? 'active'"><i class="mini tags icon"></i>标签</a>
-                <a href="#" th:href="@{/archives}" class="m-item item m-mobile-hide" th:classappend="${n == 4} ? 'active'"><i class="mini clone icon"></i>归档</a>
-                <a href="#" th:href="@{/about}" class="m-item item m-mobile-hide" th:classappend="${n == 5} ? 'active'"><i class="mini info icon"></i>关于我</a>
+                <h2 class="ui teal header item gradient-text-one">Guozhenwei</h2>
+                <a href="#" th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n == 1} ? 'active'"><i class="home icon"></i>首页</a>
+                <a href="#" th:href="@{/types/-1}" class="m-item item m-mobile-hide" th:classappend="${n == 2} ? 'active'"><i class="idea icon"></i>分类</a>
+                <a href="#" th:href="@{/tags/-1}" class="m-item item m-mobile-hide" th:classappend="${n == 3} ? 'active'"><i class="tags icon"></i>标签</a>
+                <a href="#" th:href="@{/archives}" class="m-item item m-mobile-hide" th:classappend="${n == 4} ? 'active'"><i class="clone icon"></i>归档</a>
+                <a href="#" th:href="@{/about}" class="m-item item m-mobile-hide" th:classappend="${n == 5} ? 'active'"><i class="info icon"></i>关于我</a>
                 <div class="right m-item item m-mobile-hide">
                     <form name="search" action="#" th:action="@{/search}" target="_blank" method="post">
-                        <div class="ui icon inverted transparent input">
+                        <div id="m-search-input" class="ui icon inverted transparent input">
                             <input type="text" name="query" placeholder="Search..." th:value="${query}" />
                             <i onclick="document.forms['search'].submit()" class="search link icon"></i>
                         </div>
@@ -36,14 +37,13 @@
         </a>
     </nav>
 
-    <!-- 底部footer -->
-    <footer th:fragment="footer" class="ui inverted vertical segment m-padded-tb-massive">
+    <footer th:fragment="footer" class="ui inverted vertical segment m-padded-tb-footer">
         <div class="ui center aligned container">
             <div class="ui inverted divided stackable grid">
                 <div class="three wide column">
                     <div class="ui inverted link list">
                         <div class="item">
-                            <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" class="ui rounded image" alt="" style="width: 110px;" />
+                            <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" class="ui rounded image" style="width: 110px;" />
                         </div>
                     </div>
                 </div>
@@ -51,43 +51,35 @@
                     <h4 class="ui inverted header m-text-thin m-text-spaced">最新博客</h4>
                     <div id="newblog-div">
                         <div class="ui inverted link list" th:fragment="newBlogList">
-                            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog: ${newBlogs}" th:text="${blog.title}">失败要趁早</a>
+                            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item m-underline-none" th:each="blog: ${newBlogs}" th:text="${blog.title}">失败要趁早</a>
                         </div>
                     </div>
                 </div>
                 <div class="three wide column">
                     <h4 class="ui inverted header m-text-thin m-text-spaced">联系我</h4>
                     <div class="ui inverted link list">
-                        <a href="#" class="item" th:text="#{user.email}">Email: upfly@163.com</a>
-                        <a href="#" class="item">QQ: 2227465945</a>
+                        <p class="item m-white-opacity-tiny" th:text="#{user.email}">Email: upfly@163.com</p>
+                        <p class="item m-white-opacity-tiny">QQ: 2227465945</p>
                     </div>
                 </div>
                 <div class="seven wide column">
                     <h4 class="ui inverted header m-text-thin m-text-spaced">Guozhenwei</h4>
-                    <p class="m-text-thin m-text-spaced m-opacity-mini">这是我的个人博客、会分享关于编程、写作、思考相关的任何内容，希望可以给来到这儿的人有所帮助...</p>
+                    <p class="m-text-thin m-text-spaced m-opacity-mini">欢迎访问我的个人博客</p>
+                    <p class="m-text-thin m-text-spaced m-opacity-mini">编程不仅是一门技术，更是一门艺术。</p>
                 </div>
             </div>
-            <!-- 分割线 -->
             <div class="ui inverted section divider"></div>
-            <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2020 - 2021 Guozhenwei Designed by Guozhenwei</p>
+            <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2020 - <span th:text="${#dates.year(#dates.createNow())}"></span> Guozhenwei Designed by Guozhenwei</p>
         </div>
     </footer>
 
-    <th:block th:fragment="script">
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
-
-        <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
-        <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
-        <script src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
-        <script src="../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
-        <script src="../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
-    </th:block>
-
-    <script>
+    <script th:fragment="js">
         var url = "/footer/newblog";
         $("#newblog-div").load(url);
+
+        // 动态背景线条跟随鼠标移动
+        !function(){function n(n,e,t){return n.getAttribute(e)||t}function e(n){return document.getElementsByTagName(n)}function t(){var t=e("script"),o=t.length,i=t[o-1];return{l:o,z:n(i,"zIndex",-1),o:n(i,"opacity",0.8),c:n(i,"color","255,255,255"),n:n(i,"count",99)}}function o(){a=m.width=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth,c=m.height=window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight}function i(){r.clearRect(0,0,a,c);var n,e,t,o,m,l;s.forEach(function(i,x){for(i.x+=i.xa,i.y+=i.ya,i.xa*=i.x>a||i.x<0?-1:1,i.ya*=i.y>c||i.y<0?-1:1,r.fillRect(i.x-.5,i.y-.5,1,1),e=x+1;e<u.length;e++)n=u[e],null!==n.x&&null!==n.y&&(o=i.x-n.x,m=i.y-n.y,l=o*o+m*m,l<n.max&&(n===y&&l>=n.max/2&&(i.x-=.03*o,i.y-=.03*m),t=(n.max-l)/n.max,r.beginPath(),r.lineWidth=t/2,r.strokeStyle="rgba("+d.c+","+(t+.2)+")",r.moveTo(i.x,i.y),r.lineTo(n.x,n.y),r.stroke()))}),x(i)}var a,c,u,m=document.createElement("canvas"),d=t(),l="c_n"+d.l,r=m.getContext("2d"),x=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(n){window.setTimeout(n,1e3/45)},w=Math.random,y={x:null,y:null,max:2e4};m.id=l,m.style.cssText="position:fixed;top:0;left:0;z-index:"+d.z+";opacity:"+d.o,e("body")[0].appendChild(m),o(),window.onresize=o,window.onmousemove=function(n){n=n||window.event,y.x=n.clientX,y.y=n.clientY},window.onmouseout=function(){y.x=null,y.y=null};for(var s=[],f=0;d.n>f;f++){var h=w()*a,g=w()*c,v=2*w()-1,p=2*w()-1;s.push({x:h,y:g,xa:v,ya:p,max:6e3})}u=s.concat([y]),setTimeout(function(){i()},100)}();
+
     </script>
 
 </body>

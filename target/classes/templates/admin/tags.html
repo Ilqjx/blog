@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="admin/_fragments :: head(~{::title})">
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>标签管理</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css">
-    <link rel="stylesheet" href="../../static/css/me.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <title>郭振伟个人博客_标签管理</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css" />
+    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}" />
 </head>
 <body>
 
@@ -35,24 +37,24 @@
         </a>
     </nav>
 
-    <div class="ui attached pointing menu">
+    <div class="ui attached pointing menu m-opacity-background-mini">
         <div class="ui container">
             <div class="right menu">
+                <a href="#" th:href="@{/admin/tags}" class="active teal item m-white-background">列表</a>
                 <a href="#" th:href="@{/admin/tags/input}" class="item">新增</a>
-                <a href="#" th:href="@{/admin/tags}" class="active teal item">列表</a>
             </div>
         </div>
     </div>
 
     <!-- 中间内容 -->
-    <div class="m-container-small m-padded-tb-big">
+    <div class="m-container-small  m-mobile-lr-clear m-mobile-margin">
         <div class="ui container">
-            <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+            <div class="ui success message m-opacity-background-mini" th:unless="${#strings.isEmpty(message)}">
                 <i class="close icon"></i>
                 <div class="header">提示：</div>
                 <p th:text="${message}"></p>
             </div>
-            <table class="ui compact table">
+            <table class="ui compact table m-opacity-background-mini">
                 <thead>
                     <tr>
                         <th></th>
@@ -72,16 +74,18 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="6">
-                            <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
+                        <th colspan="3">
+                            <a href="#" th:href="@{/admin/tags/input}" class="ui mini orange basic button">新增</a>
+                            <div class="ui right floated mini pagination menu" th:if="${page.totalPages}>1">
                                 <a href="#" th:href="@{/admin/tags(page=${page.number}-1)}" class="item" th:unless="${page.first}">上一页</a>
                                 <a href="#" th:href="@{/admin/tags(page=${page.number}+1)}" class="item" th:unless="${page.last}">下一页</a>
                             </div>
-                            <a href="#" th:href="@{/admin/tags/input}" class="ui mini right floated teal basic button">新增</a>
                         </th>
                     </tr>
                 </tfoot>
             </table>
+
+            <div th:if="${#arrays.length(page.content)}==0" class="m-margin-bottom-big"></div>
 
         </div>
     </div>
@@ -125,10 +129,8 @@
         </div>
     </footer>
 
-<!--/*/ <th:block th:replace="_fragments :: script"> /*/-->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
-<!--/*/ </th:block> /*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
 
     <script>
         $('.menu.toggle').click(function () {
@@ -144,5 +146,8 @@
                 .transition('fade');
         });
     </script>
+
+<!--/*/ <th:block th:replace="_fragments :: js"> /*/-->
+<!--/*/ </th:block> /*/-->
 </body>
 </html>

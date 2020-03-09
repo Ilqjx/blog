@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="admin/_fragments :: head(~{::title})">
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>博客管理</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css">
-    <link rel="stylesheet" href="../../static/css/me.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <title>郭振伟个人博客_博客管理</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css" />
+    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}" />
 </head>
 <body>
 
-    <nav th:replace="admin/_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini">
+    <nav th:replace="admin/_fragments :: menu(1)"class="ui inverted attached segment m-padded-tb-mini">
         <div class="ui container">
             <div class="ui inverted secondary stackable menu">
                 <h2 class="ui teal header item">管理后台</h2>
@@ -37,19 +39,19 @@
 
     <!-- 二级导航 -->
     <!-- pointing 小三角 -->
-    <div class="ui attached pointing menu">
+    <div class="ui attached pointing menu m-opacity-background-mini">
         <div class="ui container">
             <div class="right menu">
+                <a href="#" th:href="@{/admin/blogs}" class="active teal item m-white-background">列表</a>
                 <a href="#" th:href="@{/admin/blogs/input}" class="teal item">发布</a>
-                <a href="#" th:href="@{/admin/blogs}" class="active item">列表</a>
             </div>
         </div>
     </div>
 
     <!-- 中间内容 -->
-    <div class="m-container-small m-padded-tb-big">
+    <div class="m-container-small m-mobile-lr-clear m-mobile-margin">
         <div class="ui container">
-            <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+            <div class="ui success message m-opacity-background-mini" th:unless="${#strings.isEmpty(message)}">
                 <i class="close icon"></i>
                 <div class="header">提示：</div>
                 <p th:text="${message}"></p>
@@ -57,15 +59,15 @@
             <div class="ui secondary segment form">
                 <input type="hidden" name="page" />
                 <div class="inline fields">
-                    <div class="field">
-                        <input type="text" name="title" placeholder="标题" />
+                    <div class="field m-input-placeholder">
+                        <input type="text" name="title" class="m-opacity-background-transparent" placeholder="标题" />
                     </div>
-                    <div class="field">
+                    <div class="field m-mobile-margin-tb-tiny">
                         <div class="ui labeled action input">
-                            <div class="ui type selection dropdown">
+                            <div class="ui type selection dropdown m-opacity-background-transparent">
                                 <input type="hidden" name="typeId" />
                                 <i class="dropdown icon"></i>
-                                <div class="default text">分类</div>
+                                <div class="default text m-black">分类</div>
                                 <div class="menu">
                                     <div th:each="type: ${types}" class="item" th:data-value="${type.id}" th:text="${type.name}"></div>
                                 </div>
@@ -81,14 +83,14 @@
                         </div>
                     </div>
                     <div class="field">
-                        <button type="button" id="search-btn" class="ui mini teal basic button"><i class="search icon"></i>搜索</button>
+                        <button type="button" id="search-btn" class="ui teal basic tiny button"><i class="search icon"></i>搜索</button>
                     </div>
                 </div>
             </div>
 
             <div id="table-container">
                 <!-- celled 分割线 -->
-                <table th:fragment="blogList" class="ui compact teal table">
+                <table th:fragment="blogList" class="ui compact teal table m-opacity-background-mini">
                     <thead>
                     <tr>
                         <th></th>
@@ -107,7 +109,7 @@
                         <td th:text="${blog.type.name}">认知升级</td>
                         <td th:text="${blog.recommend} ? '是' : '否'">是</td>
                         <td th:text="${blog.publish} ? '发布' : '保存'">发布</td>
-                        <td th:text="${blog.updateTime}">2020-02-06 17:21</td>
+                        <td th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd HH:mm:ss')}">2020-02-06 17:21</td>
                         <td>
                             <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui mini teal basic button">编辑</a>
                             <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui mini red basic button">删除</a>
@@ -117,17 +119,18 @@
                     <tfoot>
                     <tr>
                         <th colspan="7">
-                            <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
+                            <a href="#" th:href="@{/admin/blogs/input}" class="ui mini orange basic button">新增</a>
+                            <div class="ui right floated mini pagination menu" th:if="${page.totalPages}>1">
                                 <a onclick="page(this)" th:attr="data-page=${page.number}-1" th:unless="${page.first}" class="item">上一页</a>
                                 <a onclick="page(this)" th:attr="data-page=${page.number}+1" th:unless="${page.last}" class="item">下一页</a>
                             </div>
-                            <a href="#" th:href="@{/admin/blogs/input}" class="ui mini right floated teal basic button">新增</a>
                         </th>
                     </tr>
                     </tfoot>
                 </table>
-            </div>
 
+            </div>
+            <div th:if="${#arrays.length(page.content)}==0" class="m-margin-bottom-big"></div>
         </div>
     </div>
     <br/>
@@ -170,10 +173,8 @@
         </div>
     </footer>
 
-<!--/*/ <th:block th:replace="admin/_fragments :: script"> /*/-->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
-<!--/*/ </th:block> /*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
 
     <script>
         $('.menu.toggle').click(function () {
@@ -213,5 +214,8 @@
             });
         }
     </script>
+
+<!--/*/ <th:block th:replace="_fragments :: js"> /*/-->
+<!--/*/ </th:block> /*/-->
 </body>
 </html>

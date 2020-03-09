@@ -22,6 +22,10 @@ public interface BlogService {
 
     public Long countBlog();
 
+    public List<Blog> listBlogByTagId(Long tagId);
+
+    public List<Blog> listBlogByTypeId(Long typeId);
+
     public List<Blog> listRecommendBlogTop(Integer size);
 
     public Page<Blog> listBlog(Pageable pageable);

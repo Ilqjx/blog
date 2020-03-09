@@ -2,7 +2,11 @@ package com.upfly.controller.admin;
 
 import javax.validation.Valid;
 
+import java.util.List;
+
+import com.upfly.po.Blog;
 import com.upfly.po.Type;
+import com.upfly.service.BlogService;
 import com.upfly.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,6 +28,8 @@ public class TypeController {
 
     @Autowired
     private TypeService typeService;
+    @Autowired
+    private BlogService blogService;
 
     @GetMapping("/types")
     public String types(@PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable, Model model) {
@@ -92,6 +98,12 @@ public class TypeController {
 
     @GetMapping("/types/{id}/delete")
     public String deleteType(@PathVariable Long id, RedirectAttributes attributes) {
+        List<Blog> blogList = blogService.listBlogByTypeId(id);
+        if (!blogList.isEmpty()) {
+            attributes.addFlashAttribute("message", "删除失败，该分类下有博客存在不能删除");
+            return "redirect:/admin/types";
+        }
+
         typeService.deleteType(id);
         Type type = typeService.getType(id);
         if (type == null) {

@@ -1,44 +1,43 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="admin/_fragments :: head(~{::title})">
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>博客登录</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css">
-    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <title>郭振伟个人博客_博客登录</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css" />
+    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}" />
 </head>
 <body>
 
-    <br/>
-    <br/>
-    <br/>
-    <div class="m-container-small m-padded-tb-massive" style="max-width: 30em !important;">
+    <div class="m-container-login">
         <div class="ui container">
             <div class="ui middle aligned center aligned grid">
-                <div class="column">
-                    <h2 class="ui teal image header">
+                <div class="column m-opacity-background-mini">
+                    <h2 class="ui teal header">
                         <div class="content">
-                            管理后台登录
+                            Blog Login
                         </div>
                     </h2>
-                    <form class="ui large form" method="post" action="#" th:action="@{/admin/login}">
-                        <div class="ui segment">
+                    <form id="login-form" class="ui large form" method="post" action="#" th:action="@{/admin/login}">
+                        <div id="opacity-div" class="ui segment">
                             <div class="field">
-                                <div class="ui left icon input">
+                                <div class="ui left icon input m-input-placeholder">
                                     <i class="user icon"></i>
-                                    <input type="text" name="username" placeholder="用户名">
+                                    <input type="text" name="username" class="m-opacity-background-transparent" placeholder="username" />
                                 </div>
                             </div>
                             <div class="field">
-                                <div class="ui left icon input">
+                                <div class="ui left icon input m-input-placeholder">
                                     <i class="lock icon"></i>
-                                    <input type="password" name="password" placeholder="密码">
+                                    <input id="password" type="password" name="password" class="m-opacity-background-transparent" placeholder="password" />
                                 </div>
                             </div>
-                            <button class="ui fluid large teal submit button">登 录</button>
+                            <button type="submit" class="ui fluid large teal button">Login</button>
                         </div>
 
-                        <div class="ui mini error message"></div>
+                        <div id="errorMessage-div" class="ui mini error message"></div>
                         <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></div>
                     </form>
                 </div>
@@ -49,7 +48,10 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.js"></script>
 
-    <script>
+<script src="../../js/AES-new.js" th:src="@{/js/AES-new.js}"></script>
+<script src="../../js/Base64.js" th:src="@{/js/Base64.js}"></script>
+
+    <script th:inline="javascript">
         $('.ui.form').form({
             fields: {
                 username: {
@@ -68,7 +70,42 @@
                 }
             }
         });
+
+        $('#login-form').submit(function () {
+            var password = $('#password').val();
+            var pwd = trim(password);
+            if (pwd == "") {
+                return false;
+            } else {
+                encryptPassword(pwd);
+                return true;
+            }
+        });
+
+        function encryptPassword(password) {
+            var keyM = /*[[${key}]]*/"";
+            var base64 = new Base64();
+            var encryptData = encrypt(password, keyM);
+            var encryptDataBase64 = base64.encode(encryptData);
+            $('#password').val(encryptDataBase64);
+        }
+
+        function encrypt(word, keyM) {
+            var key = CryptoJS.enc.Utf8.parse(keyM);
+            var srcs = CryptoJS.enc.Utf8.parse(word);
+            var encrypted = CryptoJS.AES.encrypt(srcs, key, {mode:CryptoJS.mode.ECB, padding:CryptoJS.pad.Pkcs7});
+            return encrypted.toString();
+        }
+
+        function trim(str) {
+            if (str == null) {
+                return "";
+            }
+            return str.replace(/^\s*(.*?)[\s\n]*$/g,'$1');
+        }
     </script>
 
+<!--/*/ <th:block th:replace="_fragments :: js"> /*/-->
+<!--/*/ </th:block> /*/-->
 </body>
 </html>

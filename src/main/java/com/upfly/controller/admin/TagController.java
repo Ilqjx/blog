@@ -2,10 +2,15 @@ package com.upfly.controller.admin;
 
 import javax.validation.Valid;
 
+import java.util.List;
+
+import com.upfly.po.Blog;
 import com.upfly.po.Tag;
+import com.upfly.service.BlogService;
 import com.upfly.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -24,6 +29,8 @@ public class TagController {
 
     @Autowired
     private TagService tagService;
+    @Autowired
+    private BlogService blogService;
 
     @GetMapping("/tags")
     public String tags(@PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable, Model model) {
@@ -89,6 +96,12 @@ public class TagController {
 
     @GetMapping("/tags/{id}/delete")
     public String deleteTag(@PathVariable Long id, RedirectAttributes attributes) {
+        List<Blog> blogList = blogService.listBlogByTagId(id);
+        if (!blogList.isEmpty()) {
+            attributes.addFlashAttribute("message", "删除失败，该标签下有博客存在不能删除");
+            return "redirect:/admin/tags";
+        }
+
         tagService.deleteTag(id);
         Tag tag = tagService.getTag(id);
         if (tag == null) {
