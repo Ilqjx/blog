@@ -29,8 +29,6 @@
 9. [Markdown转HTML](https://github.com/atlass)
 
 日志更新：
-
 #### 2020
-
-2.实现管理员登录的前端JS加密和后端Java解密(AES+BASE64)<br/>
-1.美化页面及部分功能的完善和修复bug
+1. 美化页面及部分功能的完善和修复bug
+2. 实现管理员登录的前端JS加密和后端Java解密(AES+BASE64)<br/>
