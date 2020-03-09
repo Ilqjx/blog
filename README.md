@@ -1,4 +1,4 @@
-#### Ilqjx的个人博客
+### Ilqjx的个人博客
 - - -
 编程不仅是一门技术，更是一门艺术。
 > 参考b站Yancy02发布的视频，特此感谢。
@@ -13,8 +13,9 @@
 
 技术栈：
 1. springboot
-2. thymeleaf模板引擎
-3. Semantic UI
+2. spring data jpa
+3. thymeleaf模板引擎
+4. Semantic UI
 
 插件：
 1. [MarkDown编辑器](https://pandao.github.io/editor.md)
@@ -26,3 +27,10 @@
 7. [动画滚动插件](https://github.com/flesler/jquery.scrollTo)
 8. [滚动监听插件](http://imakewebthings.com/waypoints)
 9. [Markdown转HTML](https://github.com/atlass)
+
+日志更新：
+
+#### 2020
+
+2.实现管理员登录的前端JS加密和后端Java解密(AES+BASE64)<br/>
+1.美化页面及部分功能的完善和修复bug
