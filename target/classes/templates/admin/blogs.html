@@ -42,8 +42,8 @@
     <div class="ui attached pointing menu m-opacity-background-mini">
         <div class="ui container">
             <div class="right menu">
-                <a href="#" th:href="@{/admin/blogs}" class="active teal item m-white-background">列表</a>
-                <a href="#" th:href="@{/admin/blogs/input}" class="teal item">发布</a>
+                <a href="#" th:href="@{/guozhenwei/blogs}" class="active teal item m-white-background">列表</a>
+                <a href="#" th:href="@{/guozhenwei/blogs/input}" class="teal item">发布</a>
             </div>
         </div>
     </div>
@@ -111,15 +111,15 @@
                         <td th:text="${blog.publish} ? '发布' : '保存'">发布</td>
                         <td th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd HH:mm:ss')}">2020-02-06 17:21</td>
                         <td>
-                            <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui mini teal basic button">编辑</a>
-                            <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui mini red basic button">删除</a>
+                            <a href="#" th:href="@{/guozhenwei/blogs/{id}/input(id=${blog.id})}" class="ui mini teal basic button">编辑</a>
+                            <a href="#" th:href="@{/guozhenwei/blogs/{id}/delete(id=${blog.id})}" class="ui mini red basic button">删除</a>
                         </td>
                     </tr>
                     </tbody>
                     <tfoot>
                     <tr>
                         <th colspan="7">
-                            <a href="#" th:href="@{/admin/blogs/input}" class="ui mini orange basic button">新增</a>
+                            <a href="#" th:href="@{/guozhenwei/blogs/input}" class="ui mini orange basic button">新增</a>
                             <div class="ui right floated mini pagination menu" th:if="${page.totalPages}>1">
                                 <a onclick="page(this)" th:attr="data-page=${page.number}-1" th:unless="${page.first}" class="item">上一页</a>
                                 <a onclick="page(this)" th:attr="data-page=${page.number}+1" th:unless="${page.last}" class="item">下一页</a>
@@ -205,7 +205,7 @@
         });
 
         function loadData() {
-            var url = "/admin/blogs/search";
+            var url = "/guozhenwei/blogs/search";
             $("#table-container").load(url, {
                 title: $("[name='title']").val(),
                 typeId: $("[name='typeId']").val(),

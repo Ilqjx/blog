@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/guozhenwei")
 public class TypeController {
 
     @Autowired
@@ -72,7 +72,7 @@ public class TypeController {
         } else {
             attributes.addFlashAttribute("message", "新增成功");
         }
-        return "redirect:/admin/types";
+        return "redirect:/guozhenwei/types";
     }
 
     @PostMapping("/types/{id}")
@@ -93,7 +93,7 @@ public class TypeController {
         } else {
             attributes.addFlashAttribute("message", "更新成功");
         }
-        return "redirect:/admin/types";
+        return "redirect:/guozhenwei/types";
     }
 
     @GetMapping("/types/{id}/delete")
@@ -101,7 +101,7 @@ public class TypeController {
         List<Blog> blogList = blogService.listBlogByTypeId(id);
         if (!blogList.isEmpty()) {
             attributes.addFlashAttribute("message", "删除失败，该分类下有博客存在不能删除");
-            return "redirect:/admin/types";
+            return "redirect:/guozhenwei/types";
         }
 
         typeService.deleteType(id);
@@ -111,7 +111,7 @@ public class TypeController {
         } else {
             attributes.addFlashAttribute("message", "删除失败");
         }
-        return "redirect:/admin/types";
+        return "redirect:/guozhenwei/types";
     }
 
 }

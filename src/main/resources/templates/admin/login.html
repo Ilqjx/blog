@@ -20,18 +20,18 @@
                             Blog Login
                         </div>
                     </h2>
-                    <form id="login-form" class="ui large form" method="post" action="#" th:action="@{/admin/login}">
+                    <form id="login-form" class="ui large form" method="post" action="#" th:action="@{/guozhenwei/login}">
                         <div id="opacity-div" class="ui segment">
                             <div class="field">
                                 <div class="ui left icon input m-input-placeholder">
                                     <i class="user icon"></i>
-                                    <input type="text" name="username" class="m-opacity-background-transparent" placeholder="username" />
+                                    <input id="username" type="text" class="m-opacity-background-transparent" placeholder="username" />
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="ui left icon input m-input-placeholder">
                                     <i class="lock icon"></i>
-                                    <input id="password" type="password" name="password" class="m-opacity-background-transparent" placeholder="password" />
+                                    <input id="password" type="password" class="m-opacity-background-transparent" placeholder="password" />
                                 </div>
                             </div>
                             <button type="submit" class="ui fluid large teal button">Login</button>
@@ -39,6 +39,11 @@
 
                         <div id="errorMessage-div" class="ui mini error message"></div>
                         <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></div>
+                    </form>
+
+                    <form id="submit-form" method="post" action="#" th:action="@{/guozhenwei/login}">
+                        <input id="submitUsername-input" type="hidden" name="username" />
+                        <input id="submitPassword-input" type="hidden" name="password" />
                     </form>
                 </div>
             </div>
@@ -72,22 +77,24 @@
         });
 
         $('#login-form').submit(function () {
+            var username = $('#username').val();
             var password = $('#password').val();
-            var pwd = trim(password);
-            if (pwd == "") {
-                return false;
-            } else {
-                encryptPassword(pwd);
-                return true;
+            var trimPassword = trim(password);
+            if (trimPassword != "") {
+                var encodedPassword =  encryptPassword(trimPassword);
+                $('#submitUsername-input').val(username);
+                $('#submitPassword-input').val(encodedPassword);
+                $('#submit-form').submit();
             }
+            return false;
         });
 
         function encryptPassword(password) {
-            var keyM = /*[[${key}]]*/"";
+            var keyM = /*[[${session.key}]]*/"";
             var base64 = new Base64();
             var encryptData = encrypt(password, keyM);
             var encryptDataBase64 = base64.encode(encryptData);
-            $('#password').val(encryptDataBase64);
+            return encryptDataBase64;
         }
 
         function encrypt(word, keyM) {

@@ -22,10 +22,10 @@
                 <a href="#" th:href="@{/archives}" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
                 <a href="#" th:href="@{/about}" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
                 <div class="right m-item item m-mobile-hide">
-                    <form name="search" action="#" th:action="@{/search}" target="_blank" method="post">
+                    <form id="search-form" name="search" action="#" th:action="@{/search}" target="_blank" method="post">
                         <div class="ui icon inverted transparent input">
-                            <input type="text" name="query" placeholder="Search..." th:value="${query}" />
-                            <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+                            <input id="search-input" type="text" name="query" placeholder="Search..." th:value="${query}" />
+                            <i onclick="postSearchData()" class="search link icon"></i>
                         </div>
                     </form>
                 </div>
@@ -173,7 +173,7 @@
 
                     <!-- 二维码 -->
                     <!-- divider 分割线 -->
-                    <h4 class="ui horizontal divider header m-margin-top-large m-white">扫码关注我</h4>
+                    <h4 class="ui horizontal divider header m-margin-top-large m-white">我的微信</h4>
                     <div class="ui centered card" style="width: 11em;">
                         <img src="../static/images/wechat.jpg" th:src="@{images/wechat.jpg}" class="ui rounded image" />
                     </div>

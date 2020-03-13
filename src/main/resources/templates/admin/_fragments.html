@@ -17,18 +17,18 @@
         <div class="ui container">
             <div class="ui inverted secondary stackable menu">
                 <h2 class="ui teal header item gradient-text-one">Guozhenwei's Blog</h2>
-                <a href="#" th:href="@{/admin/blogs}" class="m-item item m-mobile-hide" th:classappend="${n == 1} ? 'active'"><i class="home icon"></i>博客</a>
-                <a href="#" th:href="@{/admin/types}" class="m-item item m-mobile-hide" th:classappend="${n == 2} ? 'active'"><i class="idea icon"></i>分类</a>
-                <a href="#" th:href="@{/admin/tags}" class="m-item item m-mobile-hide" th:classappend="${n == 3} ? 'active'"><i class="tags icon"></i>标签</a>
+                <a href="#" th:href="@{/guozhenwei/blogs}" class="m-item item m-mobile-hide" th:classappend="${n == 1} ? 'active'"><i class="home icon"></i>博客</a>
+                <a href="#" th:href="@{/guozhenwei/types}" class="m-item item m-mobile-hide" th:classappend="${n == 2} ? 'active'"><i class="idea icon"></i>分类</a>
+                <a href="#" th:href="@{/guozhenwei/tags}" class="m-item item m-mobile-hide" th:classappend="${n == 3} ? 'active'"><i class="tags icon"></i>标签</a>
                 <div class="m-item right menu m-mobile-hide">
                     <div class="ui dropdown item">
                         <div class="text">
-                            <img class="ui avatar image" src="https://picsum.photos/id/1005/100/100" th:src="@{${session.user.avatar}}" />
-                            <span th:text="${session.user.nickname}">郭振伟</span>
+                            <img class="ui avatar image" src="https://picsum.photos/id/1005/100/100" th:src="@{${session.user}!=null ? ${session.user.avatar} : 'https://picsum.photos/id/1005/100/100'}" />
+                            <span th:text="${session.user}!=null ? ${session.user.nickname} : '郭振伟'">郭振伟</span>
                         </div>
                         <i class="dropdown icon"></i>
                         <div class="menu">
-                            <a href="#" th:href="@{/admin/logout}" class="item">注销</a>
+                            <a href="#" th:href="@{/guozhenwei/logout}" class="item">注销</a>
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                     <h4 class="ui inverted header m-text-thin m-text-spaced">联系我</h4>
                     <div class="ui inverted link list">
                         <p class="item m-white-opacity-tiny" th:text="#{user.email}">Email: upfly@163.com</p>
-                        <p class="item m-white-opacity-tiny">QQ: 2227465945</p>
+                        <p class="item m-white-opacity-tiny" th:text="#{user.qq}">QQ: 2227465945</p>
                     </div>
                 </div>
                 <div class="seven wide column">

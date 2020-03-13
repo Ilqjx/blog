@@ -43,8 +43,8 @@
     <div class="ui attached pointing menu m-opacity-background-mini">
         <div class="ui container">
             <div class="right menu">
-                <a href="#" th:href="@{/admin/blogs}" class="teal item">列表</a>
-                <a href="#" th:href="@{/admin/blogs/input}" class="active teal item m-white-background">发布</a>
+                <a href="#" th:href="@{/guozhenwei/blogs}" class="teal item">列表</a>
+                <a href="#" th:href="@{/guozhenwei/blogs/input}" class="active teal item m-white-background">发布</a>
             </div>
         </div>
     </div>
@@ -52,7 +52,7 @@
     <!-- 中间内容 -->
     <div class="m-container">
         <div class="ui container">
-            <form action="#" id="blog-form" method="post" th:object="${blog}" th:action="*{id}==null ? @{/admin/blogs} : @{/admin/blogs/{id}(id=*{id})}" class="ui form">
+            <form action="#" id="blog-form" method="post" th:object="${blog}" th:action="*{id}==null ? @{/guozhenwei/blogs} : @{/guozhenwei/blogs/{id}(id=*{id})}" class="ui form">
                 <input type="hidden" name="publish" />
                 <input type="hidden" name="id" th:value="*{id}" >
 
@@ -154,7 +154,7 @@
 
                 <div class="ui right aligned container">
                     <!-- button 在 form 里默认是 type = submit -->
-                    <button type="button" class="ui button" onclick="window.history.go(-1)">返回</button>
+                    <button type="button" class="ui button" onclick="javascript:history.back()">返回</button>
                     <button type="button" id="save-btn" class="ui secondary button">保存</button>
                     <button type="button" id="publish-btn" class="ui teal button">发布</button>
                 </div>

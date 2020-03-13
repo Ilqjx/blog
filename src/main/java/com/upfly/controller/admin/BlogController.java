@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/guozhenwei")
 public class BlogController {
 
     @Autowired
@@ -88,7 +88,7 @@ public class BlogController {
         } else {
             attributes.addFlashAttribute("message", "新增成功");
         }
-        return "redirect:/admin/blogs";
+        return "redirect:/guozhenwei/blogs";
     }
 
     @PostMapping("/blogs/{id}")
@@ -108,7 +108,7 @@ public class BlogController {
         } else {
             attributes.addFlashAttribute("message", "更新成功");
         }
-        return "redirect:/admin/blogs";
+        return "redirect:/guozhenwei/blogs";
     }
 
     @GetMapping("/blogs/{id}/delete")
@@ -120,7 +120,7 @@ public class BlogController {
         } else {
             attributes.addFlashAttribute("message", "删除失败");
         }
-        return "redirect:/admin/blogs";
+        return "redirect:/guozhenwei/blogs";
     }
 
 }

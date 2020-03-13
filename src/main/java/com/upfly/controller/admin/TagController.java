@@ -10,7 +10,6 @@ import com.upfly.service.BlogService;
 import com.upfly.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -24,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/guozhenwei")
 public class TagController {
 
     @Autowired
@@ -70,7 +69,7 @@ public class TagController {
         } else {
             attributes.addFlashAttribute("message", "新增成功");
         }
-        return "redirect:/admin/tags";
+        return "redirect:/guozhenwei/tags";
     }
 
     @PostMapping("/tags/{id}")
@@ -91,7 +90,7 @@ public class TagController {
         } else {
             attributes.addFlashAttribute("message", "更新成功");
         }
-        return "redirect:/admin/tags";
+        return "redirect:/guozhenwei/tags";
     }
 
     @GetMapping("/tags/{id}/delete")
@@ -99,7 +98,7 @@ public class TagController {
         List<Blog> blogList = blogService.listBlogByTagId(id);
         if (!blogList.isEmpty()) {
             attributes.addFlashAttribute("message", "删除失败，该标签下有博客存在不能删除");
-            return "redirect:/admin/tags";
+            return "redirect:/guozhenwei/tags";
         }
 
         tagService.deleteTag(id);
@@ -109,7 +108,7 @@ public class TagController {
         } else {
             attributes.addFlashAttribute("message", "删除失败");
         }
-        return "redirect:/admin/tags";
+        return "redirect:/guozhenwei/tags";
     }
 
 }

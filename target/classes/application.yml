@@ -9,4 +9,4 @@ spring:
   messages:
     basename: i18n/messages
 
-comment.avatar: /images/avatar.jpg
+comment.avatar: /images/avatar.jpeg

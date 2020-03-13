@@ -18,6 +18,7 @@ public class User {
     private String password; // 密码
     private String email; // 邮箱
     private String avatar; // 头像
+    private String salt; // 盐
     private Integer type; // 类型
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime; // 创建时间
@@ -75,6 +76,14 @@ public class User {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public Integer getType() {
