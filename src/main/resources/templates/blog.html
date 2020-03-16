@@ -6,6 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
     <title>郭振伟个人博客_博客详情</title>
+    <link rel="shortcut icon" href="../static/images/favicon.ico" th:href="@{/images/favicon.ico}" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css" />
     <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}" />
     <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}" />
@@ -72,11 +73,11 @@
                 <!-- 标签 -->
                 <div class="m-padded-lr-responsive">
                     <!-- basic 只有边线 -->
-                    <div class="ui teal basic label" th:each="tag: ${blog.tagList}" th:text="${tag.name}">方法论</div>
+                    <a th:href="@{/tags/{id}(id=${tag.id})}" target="_blank" class="ui teal basic label" th:each="tag: ${blog.tagList}" th:text="${tag.name}">方法论</a>
                 </div>
 
                 <!-- 赞赏 -->
-                <div th:if="${blog.appreciate}" class="">
+                <div th:if="${blog.appreciate}" class="m-mobile-hide">
                     <div class="ui center aligned basic segment" style="background-color: rgba(0, 0, 0, 0) !important;">
                         <!-- circular 大圆角 -->
                         <button id="payButton" class="ui orange basic circular button">赞赏</button>

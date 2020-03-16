@@ -6,6 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
     <title>郭振伟个人博客_搜索结果</title>
+    <link rel="shortcut icon" href="../static/images/favicon.ico" th:href="@{/images/favicon.ico}" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css" />
     <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}" />
 </head>
@@ -49,7 +50,7 @@
                 </div>
             </div>
 
-            <div th:if="${#arrays.length(page.content)}==0" class="m-margin-bottom-huge"></div>
+            <div th:if="${#arrays.length(page.content)}==0" class="m-margin-bottom-huge m-mobile-hide"></div>
 
             <div class="ui top attached teal segment" th:unless="${#arrays.length(page.content)}==0">
                 <div id="opacity-div" class="ui padded vertical segment m-padded-tb-large m-blue-div-hover" th:each="blog: ${page.content}">

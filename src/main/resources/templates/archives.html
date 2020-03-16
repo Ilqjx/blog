@@ -6,6 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
     <title>郭振伟个人博客_归档</title>
+    <link rel="shortcut icon" href="../static/images/favicon.ico" th:href="@{/images/favicon.ico}" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css" />
     <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}" />
     <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}" />
@@ -52,9 +53,9 @@
                 </div>
             </div>
 
-            <div th:if="${#arrays.length(archiveMap)}==0" class="m-margin-bottom-huge"></div>
+            <div th:if="${#maps.size(archiveMap)}==0" class="m-margin-bottom-huge m-mobile-hide"></div>
 
-            <th:block th:each="item: ${archiveMap}" th:unless="${#arrays.length(archiveMap)}==0">
+            <th:block th:each="item: ${archiveMap}" th:unless="${#maps.size(archiveMap)}==0">
                 <h3 class="ui center aligned header m-white" th:text="${item.key}">2020</h3>
                 <div class="ui fluid vertical menu m-opacity-background-mini">
                     <!-- item 有两个元素会一左一右分开 -->

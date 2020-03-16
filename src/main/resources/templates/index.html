@@ -6,16 +6,17 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
     <title>郭振伟个人博客</title>
+    <link rel="shortcut icon" href="../static/images/favicon.ico" th:href="@{/images/favicon.ico}" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.4/dist/semantic.min.css" />
     <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}" />
     <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}" />
 </head>
 <body>
 
-    <nav class="ui inverted attached segment m-padded-none">
+    <nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment m-padded-none">
         <div class="ui container">
             <div class="ui inverted secondary stackable menu">
-                <h2 class="ui teal header item gradient-text-one animated rollIn">Guozhenwei</h2>
+                <h2 class="ui teal header item gradient-text-one animated rollIn">GZW's Blog</h2>
                 <a href="#" th:href="@{/}" class="active m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
                 <a href="#" th:href="@{/types/-1}" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
                 <a href="#" th:href="@{/tags/-1}" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
@@ -54,7 +55,7 @@
                         </div>
                     </div>
 
-                    <div th:if="${#arrays.length(page.content)}==0" class="m-margin-bottom-huge"></div>
+                    <div th:if="${#arrays.length(page.content)}==0" class="m-margin-bottom-huge m-mobile-hide"></div>
 
                     <!-- content -->
                     <div class="ui attached segment" th:unless="${#arrays.length(page.content)}==0">
